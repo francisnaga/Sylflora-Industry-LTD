@@ -39,17 +39,20 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer style={{ background: '#080B10', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-      <div className="max-w-6xl mx-auto px-5 md:px-8 xl:px-12 py-16 md:py-20">
+    <footer style={{ background: '#080B10', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-16 py-20 md:py-24">
 
         {/* Top section */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-14 mb-20">
 
           {/* Brand col — spans 2 on lg */}
-          <div className="lg:col-span-2 flex flex-col gap-6">
+          <div className="lg:col-span-2 flex flex-col gap-7">
             {/* Logo */}
-            <a href="#home" className="flex items-center gap-3 group w-fit">
-              <div className="w-11 h-11 rounded-full overflow-hidden" style={{ boxShadow: '0 0 0 1px rgba(255,255,255,0.1)' }}>
+            <a href="#home" className="flex items-center gap-4 group w-fit">
+              <div 
+                className="w-12 h-12 rounded-full overflow-hidden transition-transform duration-300 group-hover:scale-105"
+                style={{ boxShadow: '0 0 0 1px rgba(255,255,255,0.08)' }}
+              >
                 <img
                   src={LOGO_URL}
                   alt="SylFlora Industries logo"
@@ -58,18 +61,18 @@ export default function Footer() {
               </div>
               <div>
                 <p
-                  className="text-[18px] font-black leading-tight"
+                  className="text-[20px] font-black leading-tight"
                   style={{ fontFamily: 'var(--font-display)', color: '#FFFFFF' }}
                 >
                   SylFlora
                 </p>
-                <p className="text-[10px] font-semibold tracking-[0.1em] uppercase" style={{ color: '#4B5563' }}>
+                <p className="text-[10px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#4B5563' }}>
                   Industries Ltd
                 </p>
               </div>
             </a>
 
-            <p className="text-[14px] leading-relaxed max-w-[260px]" style={{ color: '#4B5563' }}>
+            <p className="text-[14px] leading-relaxed max-w-[280px]" style={{ color: '#4B5563' }}>
               Nurturing a Hygienic Generation through premium tissue and hygiene manufacturing since 2014.
             </p>
 
@@ -77,34 +80,34 @@ export default function Footer() {
             <div className="flex flex-col gap-3">
               <a
                 href="tel:+2347036606036"
-                className="flex items-center gap-2.5 text-[13px] transition-colors"
+                className="flex items-center gap-3 text-[13px] transition-colors duration-300"
                 style={{ color: '#6B7280' }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = '#6B7280')}
               >
-                <Phone size={13} />
+                <Phone size={14} />
                 +234 703 660 6036
               </a>
               <a
                 href="mailto:info@sylflora.com"
-                className="flex items-center gap-2.5 text-[13px] transition-colors"
+                className="flex items-center gap-3 text-[13px] transition-colors duration-300"
                 style={{ color: '#6B7280' }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = '#6B7280')}
               >
-                <Mail size={13} />
+                <Mail size={14} />
                 info@sylflora.com
               </a>
               <a
                 href="https://www.sylflora.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-[13px] transition-colors"
+                className="flex items-center gap-3 text-[13px] transition-colors duration-300"
                 style={{ color: '#6B7280' }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = '#6B7280')}
               >
-                <Globe size={13} />
+                <Globe size={14} />
                 www.sylflora.com
               </a>
             </div>
@@ -112,21 +115,21 @@ export default function Footer() {
 
           {/* Nav link groups */}
           {navGroups.map((group) => (
-            <div key={group.title} className="flex flex-col gap-5">
+            <div key={group.title} className="flex flex-col gap-6">
               <p
-                className="text-[11px] font-bold tracking-[0.12em] uppercase"
-                style={{ color: '#3FAF75' }}
+                className="text-[11px] font-bold tracking-[0.15em] uppercase"
+                style={{ color: '#4FA870' }}
               >
                 {group.title}
               </p>
-              <ul className="flex flex-col gap-3">
+              <ul className="flex flex-col gap-4">
                 {group.links.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
                       target={link.href.startsWith('http') ? '_blank' : undefined}
                       rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      className="text-[13px] transition-colors"
+                      className="text-[13px] transition-colors duration-300"
                       style={{ color: '#4B5563' }}
                       onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
                       onMouseLeave={(e) => (e.currentTarget.style.color = '#4B5563')}
@@ -142,13 +145,18 @@ export default function Footer() {
 
         {/* Address bar */}
         <div
-          className="flex flex-col sm:flex-row gap-6 py-8 mb-8"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+          className="flex flex-col sm:flex-row gap-8 py-10 mb-10"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.04)', borderBottom: '1px solid rgba(255,255,255,0.04)' }}
         >
-          <div className="flex items-start gap-2.5">
-            <MapPin size={13} className="mt-0.5 shrink-0" style={{ color: '#3FAF75' }} />
+          <div className="flex items-start gap-4">
+            <div 
+              className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+              style={{ background: 'rgba(79,168,112,0.1)' }}
+            >
+              <MapPin size={14} style={{ color: '#4FA870' }} />
+            </div>
             <div>
-              <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: '#374151' }}>Factory</p>
+              <p className="text-[10px] font-bold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#374151' }}>Factory</p>
               <p className="text-[12px] leading-relaxed" style={{ color: '#4B5563' }}>
                 Phase II, Block 39 Plot 10, Unique Estate Nkwelle Ogidi, Idemili North LGA, Anambra State
               </p>
@@ -156,12 +164,17 @@ export default function Footer() {
           </div>
           <div
             className="w-px hidden sm:block self-stretch"
-            style={{ background: 'rgba(255,255,255,0.05)' }}
+            style={{ background: 'rgba(255,255,255,0.04)' }}
           />
-          <div className="flex items-start gap-2.5">
-            <MapPin size={13} className="mt-0.5 shrink-0" style={{ color: '#2F80ED' }} />
+          <div className="flex items-start gap-4">
+            <div 
+              className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
+              style={{ background: 'rgba(47,128,237,0.1)' }}
+            >
+              <MapPin size={14} style={{ color: '#2F80ED' }} />
+            </div>
             <div>
-              <p className="text-[10px] font-bold tracking-widest uppercase mb-1" style={{ color: '#374151' }}>Admin Office</p>
+              <p className="text-[10px] font-bold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#374151' }}>Admin Office</p>
               <p className="text-[12px] leading-relaxed" style={{ color: '#4B5563' }}>
                 Plot 3, Surulere Industrial Road, Off Acme, Ikeja, Lagos State
               </p>
@@ -176,7 +189,7 @@ export default function Footer() {
           </p>
           <p className="text-[12px]" style={{ color: '#374151' }}>
             Exclusively marketed in West Africa by{' '}
-            <span className="font-semibold" style={{ color: '#3FAF75' }}>
+            <span className="font-semibold" style={{ color: '#4FA870' }}>
               Doda Troupe Int&apos;l Ltd
             </span>
           </p>

@@ -63,36 +63,45 @@ export default function IndustryPresence() {
     <section
       ref={ref}
       id="presence"
-      className="section-padding"
+      className="py-28 md:py-36 lg:py-44 relative overflow-hidden"
       style={{ background: '#0A0D12' }}
     >
-      <div className="max-w-6xl mx-auto px-5 md:px-8 xl:px-12">
+      {/* Ambient glow */}
+      <div 
+        className="absolute top-1/2 left-1/2 w-[1000px] h-[600px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2"
+        style={{ 
+          background: 'radial-gradient(ellipse, rgba(45,138,90,0.06) 0%, transparent 60%)',
+        }}
+      />
+      
+      <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-16 relative z-10">
 
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16"
+          transition={{ duration: 0.8 }}
+          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-20"
         >
           <div>
             <p
-              className="text-[11px] font-semibold tracking-[0.14em] uppercase mb-4"
-              style={{ color: '#3FAF75' }}
+              className="text-[11px] font-semibold tracking-[0.2em] uppercase mb-6 flex items-center gap-4"
+              style={{ color: '#4FA870' }}
             >
+              <span className="h-px w-10" style={{ background: '#4FA870' }} />
               Industry Presence
             </p>
             <h2
-              className="text-[2.4rem] md:text-[3rem] xl:text-[3.5rem] font-black leading-[1.05] tracking-[-0.025em] text-balance"
+              className="text-[2.75rem] md:text-[3.25rem] xl:text-[3.75rem] font-black leading-[1.02] tracking-[-0.03em] text-balance"
               style={{ fontFamily: 'var(--font-display)', color: '#FFFFFF' }}
             >
               Where Innovation
               <br />
-              Meets Industry
+              <span style={{ color: '#4FA870' }}>Meets Industry</span>
             </h2>
           </div>
           <p
-            className="text-[15px] leading-relaxed max-w-xs"
+            className="text-[16px] leading-relaxed max-w-sm lg:pb-2"
             style={{ color: '#6B7280' }}
           >
             SylFlora has established a commanding presence at Nigeria&apos;s most prestigious
@@ -102,11 +111,14 @@ export default function IndustryPresence() {
 
         {/* Main featured image carousel */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="relative rounded-3xl overflow-hidden mb-8"
-          style={{ height: '480px' }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative rounded-[2rem] overflow-hidden mb-8"
+          style={{ 
+            height: '540px',
+            boxShadow: '0 32px 80px rgba(0,0,0,0.3)'
+          }}
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -114,7 +126,7 @@ export default function IndustryPresence() {
               initial={{ opacity: 0, scale: 1.04 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-0"
             >
               <img
@@ -126,71 +138,81 @@ export default function IndustryPresence() {
                 className="absolute inset-0"
                 style={{
                   background:
-                    'linear-gradient(to top, rgba(10,13,18,0.85) 0%, rgba(10,13,18,0.2) 40%, transparent 100%)',
+                    'linear-gradient(to top, rgba(10,13,18,0.9) 0%, rgba(10,13,18,0.25) 45%, transparent 100%)',
                 }}
               />
             </motion.div>
           </AnimatePresence>
 
           {/* Caption overlay */}
-          <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10 z-10">
+          <div className="absolute bottom-0 left-0 right-0 p-10 md:p-14 z-10">
             <motion.div
               key={`caption-${active}`}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.6 }}
             >
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex items-center gap-4 mb-4">
                 <span
-                  className="text-[10px] font-bold tracking-[0.14em] uppercase px-2.5 py-1 rounded-full"
-                  style={{ background: 'rgba(63,175,117,0.2)', color: '#3FAF75' }}
+                  className="text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1.5 rounded-full"
+                  style={{ background: 'rgba(79,168,112,0.2)', color: '#4FA870' }}
                 >
                   {current.year}
                 </span>
                 <span
-                  className="text-[13px] font-semibold"
-                  style={{ color: 'rgba(255,255,255,0.6)' }}
+                  className="text-[14px] font-semibold"
+                  style={{ color: 'rgba(255,255,255,0.65)' }}
                 >
                   {current.label}
                 </span>
               </div>
               <p
-                className="text-[16px] md:text-[18px] leading-relaxed max-w-2xl"
-                style={{ color: 'rgba(255,255,255,0.85)' }}
+                className="text-[17px] md:text-[19px] leading-relaxed max-w-2xl"
+                style={{ color: 'rgba(255,255,255,0.9)' }}
               >
                 {current.caption}
               </p>
             </motion.div>
           </div>
 
-          {/* Arrow controls */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-4 right-4 flex justify-between z-10 pointer-events-none">
+          {/* Arrow controls — refined styling */}
+          <div className="absolute top-1/2 -translate-y-1/2 left-6 right-6 flex justify-between z-10 pointer-events-none">
             <button
               onClick={prev}
-              className="pointer-events-auto w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200"
+              className="pointer-events-auto w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105"
               style={{
                 background: 'rgba(255,255,255,0.1)',
-                backdropFilter: 'blur(8px)',
+                backdropFilter: 'blur(12px)',
                 border: '1px solid rgba(255,255,255,0.15)',
                 color: '#FFFFFF',
               }}
               aria-label="Previous image"
             >
-              <ArrowLeft size={18} />
+              <ArrowLeft size={20} />
             </button>
             <button
               onClick={next}
-              className="pointer-events-auto w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200"
+              className="pointer-events-auto w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105"
               style={{
                 background: 'rgba(255,255,255,0.1)',
-                backdropFilter: 'blur(8px)',
+                backdropFilter: 'blur(12px)',
                 border: '1px solid rgba(255,255,255,0.15)',
                 color: '#FFFFFF',
               }}
               aria-label="Next image"
             >
-              <ArrowRight size={18} />
+              <ArrowRight size={20} />
             </button>
+          </div>
+          
+          {/* Progress indicator */}
+          <div className="absolute top-6 right-6 z-10">
+            <p 
+              className="text-[13px] font-semibold tabular-nums"
+              style={{ color: 'rgba(255,255,255,0.6)' }}
+            >
+              {String(active + 1).padStart(2, '0')} / {String(events.length).padStart(2, '0')}
+            </p>
           </div>
         </motion.div>
 
@@ -200,13 +222,14 @@ export default function IndustryPresence() {
             <button
               key={event.label}
               onClick={() => setActive(i)}
-              className="relative shrink-0 overflow-hidden rounded-xl transition-all duration-300"
+              className="relative shrink-0 overflow-hidden rounded-xl transition-all duration-400"
               style={{
-                width: '100px',
-                height: '68px',
-                opacity: i === active ? 1 : 0.45,
-                outline: i === active ? '2px solid #3FAF75' : '2px solid transparent',
-                outlineOffset: '2px',
+                width: '120px',
+                height: '80px',
+                opacity: i === active ? 1 : 0.4,
+                outline: i === active ? '2px solid #4FA870' : '2px solid transparent',
+                outlineOffset: '3px',
+                transform: i === active ? 'scale(1)' : 'scale(0.95)',
               }}
               aria-label={`View image: ${event.label}`}
             >
@@ -223,24 +246,24 @@ export default function IndustryPresence() {
 
         {/* Bottom credibility bar */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="mt-14 flex flex-wrap items-center justify-between gap-6 pt-10"
+          transition={{ delay: 0.5, duration: 0.7 }}
+          className="mt-16 flex flex-wrap items-center justify-between gap-6 pt-12"
           style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
         >
           <p className="text-[14px]" style={{ color: '#6B7280' }}>
             Proudly exhibited at Nigeria&apos;s major trade events since 2017.
           </p>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <span
               className="w-2 h-2 rounded-full"
-              style={{ background: '#3FAF75' }}
+              style={{ background: '#4FA870' }}
             />
             <span className="text-[13px] font-semibold" style={{ color: '#FFFFFF' }}>
               Lagos International Trade Fair
             </span>
-            <span style={{ color: '#4B5563' }}>·</span>
+            <span style={{ color: '#374151' }}>·</span>
             <span className="text-[13px] font-semibold" style={{ color: '#FFFFFF' }}>
               West African Trade Exhibition
             </span>
