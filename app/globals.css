@@ -148,15 +148,15 @@
   color: var(--foreground);
 }
 
-/* Luxury animations */
+/* Luxury animations — slower, more elegant */
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-12px) rotate(1deg); }
+  50% { transform: translateY(-16px) rotate(1.5deg); }
 }
 
 @keyframes float-delayed {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(-1deg); }
+  50% { transform: translateY(-12px) rotate(-1deg); }
 }
 
 @keyframes shimmer {
@@ -181,12 +181,12 @@
 }
 
 .animate-float {
-  animation: float 6s ease-in-out infinite;
+  animation: float 8s ease-in-out infinite;
 }
 
 .animate-float-delayed {
-  animation: float-delayed 7s ease-in-out infinite;
-  animation-delay: 1s;
+  animation: float-delayed 9s ease-in-out infinite;
+  animation-delay: 1.5s;
 }
 
 .animate-shimmer {
@@ -203,19 +203,27 @@
   animation: fade-in-up 0.6s ease-out forwards;
 }
 
-/* Glassmorphism utilities */
+/* Glassmorphism utilities — refined */
 .glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 
+    0 0 0 1px rgba(255,255,255,0.3),
+    0 4px 12px rgba(0,0,0,0.03),
+    0 16px 32px rgba(0,0,0,0.05);
 }
 
 .glass-dark {
-  background: rgba(10, 13, 18, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 13, 18, 0.85);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 0 0 1px rgba(255,255,255,0.05),
+    0 4px 12px rgba(0,0,0,0.1),
+    0 16px 32px rgba(0,0,0,0.15);
 }
 
 /* Premium shadows */
