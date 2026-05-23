@@ -42,7 +42,8 @@ export default function About() {
       ref={ref}
       className="py-24 md:py-32 overflow-hidden relative"
       style={{ background: 'var(--off-white)' }}
-    >
+    />
+      
       <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-16 relative z-10">
 
         {/* TOP: Split layout with more breathing room */}
