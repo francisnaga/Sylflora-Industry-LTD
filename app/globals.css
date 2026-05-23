@@ -4,65 +4,66 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Core — Industrial Navy + White + Cyan */
+  /* Core — Industrial Blue + Hygiene Green + White */
   --background: #FFFFFF;
-  --foreground: #0B1120;
+  --foreground: #0A1628;
   --card: #FFFFFF;
-  --card-foreground: #0B1120;
+  --card-foreground: #0A1628;
   --popover: #FFFFFF;
-  --popover-foreground: #0B1120;
-  --primary: #0B1120;
+  --popover-foreground: #0A1628;
+  --primary: #0A1628;
   --primary-foreground: #FFFFFF;
-  --secondary: #F4F6F9;
-  --secondary-foreground: #0B1120;
-  --muted: #F4F6F9;
-  --muted-foreground: #5C6B82;
-  --accent: #00A8C6;
+  --secondary: #F4F7F9;
+  --secondary-foreground: #0A1628;
+  --muted: #F4F7F9;
+  --muted-foreground: #5B6B7D;
+  --accent: #1B7A4C;
   --accent-foreground: #FFFFFF;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: #DDE3EC;
-  --input: #EDF0F5;
-  --ring: #00A8C6;
+  --border: #DDE4EB;
+  --input: #EDF1F5;
+  --ring: #1B7A4C;
   --radius: 0.5rem;
 
-  /* Industrial Brand Palette */
-  --navy: #0B1120;
-  --navy-mid: #162035;
-  --navy-light: #1E2D4A;
-  --navy-muted: #2A3C5C;
-  --cyan: #00A8C6;
-  --cyan-light: #33BDD5;
-  --cyan-dark: #007E96;
-  --green: #1A7A4A;
-  --green-light: #22A063;
+  /* Brand Palette — Industrial Blue + Hygiene Green */
+  --navy: #0A1628;
+  --navy-mid: #132036;
+  --navy-light: #1A2D4A;
+  --navy-muted: #263B5A;
+  --blue: #1565C0;
+  --blue-light: #1E88E5;
+  --blue-dark: #0D47A1;
+  --green: #1B7A4C;
+  --green-light: #27A361;
+  --green-dark: #14613B;
   --white: #FFFFFF;
-  --off-white: #F8FAFC;
+  --off-white: #F8FAFB;
 
   /* Neutral System */
-  --neutral-50: #F8FAFC;
-  --neutral-100: #F1F4F8;
-  --neutral-200: #DDE3EC;
-  --neutral-300: #C4CEDB;
-  --neutral-400: #8E9DB5;
-  --neutral-500: #5C6B82;
-  --neutral-600: #3D4F68;
-  --neutral-700: #273650;
-  --neutral-800: #162035;
-  --neutral-900: #0B1120;
+  --neutral-50: #F8FAFB;
+  --neutral-100: #F1F4F7;
+  --neutral-200: #DDE4EB;
+  --neutral-300: #C4CED9;
+  --neutral-400: #8D9CAE;
+  --neutral-500: #5B6B7D;
+  --neutral-600: #3C4E63;
+  --neutral-700: #26364D;
+  --neutral-800: #132036;
+  --neutral-900: #0A1628;
 
   /* Surface */
   --surface: #FFFFFF;
-  --surface-alt: #F4F6F9;
-  --dark-bg: #080D18;
-  --dark-surface: #0B1120;
-  --dark-elevated: #162035;
-  --dark-border: rgba(255,255,255,0.07);
+  --surface-alt: #F4F7F9;
+  --dark-bg: #060C16;
+  --dark-surface: #0A1628;
+  --dark-elevated: #132036;
+  --dark-border: rgba(255,255,255,0.08);
 
   /* Text hierarchy */
-  --text-primary: #0B1120;
-  --text-secondary: #3D4F68;
-  --text-muted: #5C6B82;
+  --text-primary: #0A1628;
+  --text-secondary: #3C4E63;
+  --text-muted: #5B6B7D;
   --text-inverse: #FFFFFF;
 }
 
@@ -89,7 +90,8 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-navy: var(--navy);
-  --color-cyan: var(--cyan);
+  --color-green: var(--green);
+  --color-blue: var(--blue);
   --color-surface: var(--surface);
   --color-dark-bg: var(--dark-bg);
   --radius-sm: calc(var(--radius) - 2px);
@@ -145,7 +147,7 @@
 
 /* Selection */
 ::selection {
-  background: rgba(0, 168, 198, 0.15);
+  background: rgba(27, 122, 76, 0.15);
   color: var(--foreground);
 }
 
@@ -193,16 +195,16 @@
 }
 
 /* Industrial rule line */
-.rule-cyan {
+.rule-green {
   display: inline-block;
   width: 2.5rem;
   height: 2px;
-  background: var(--cyan);
+  background: var(--green);
   border-radius: 1px;
 }
 
 /* Corporate tag */
-.tag-cyan {
+.tag-green {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
@@ -210,7 +212,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--cyan);
+  color: var(--green);
 }
 
 /* Industrial card */
@@ -220,9 +222,9 @@
   transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
 }
 .card-industrial:hover {
-  box-shadow: 0 12px 40px rgba(11, 17, 32, 0.1);
+  box-shadow: 0 12px 40px rgba(10, 22, 40, 0.1);
   transform: translateY(-3px);
-  border-color: var(--cyan);
+  border-color: var(--green);
 }
 
 /* Dark card */
@@ -232,8 +234,8 @@
   transition: border-color 0.3s ease, background 0.3s ease;
 }
 .card-dark:hover {
-  border-color: rgba(0, 168, 198, 0.4);
-  background: rgba(30, 45, 74, 0.8);
+  border-color: rgba(27, 122, 76, 0.4);
+  background: rgba(26, 45, 74, 0.8);
 }
 
 /* Image reveal on hover */

@@ -54,7 +54,7 @@ export default function Navbar() {
               aria-label="SylFlora Industries Ltd — go to homepage"
             >
               <div
-                className="relative w-10 h-10 md:w-11 md:h-11 rounded-full overflow-hidden shrink-0 ring-1 ring-transparent group-hover:ring-[var(--cyan)] transition-all duration-300"
+                className="relative w-10 h-10 md:w-11 md:h-11 rounded-full overflow-hidden shrink-0 ring-1 ring-transparent group-hover:ring-[var(--green)] transition-all duration-300"
               >
                 <img
                   src={LOGO_URL}
@@ -71,7 +71,7 @@ export default function Navbar() {
                 </span>
                 <span
                   className="text-[9px] font-bold tracking-[0.15em] uppercase"
-                  style={{ color: 'var(--cyan)' }}
+                  style={{ color: 'var(--green)' }}
                 >
                   Industries Ltd
                 </span>
@@ -96,7 +96,7 @@ export default function Navbar() {
                   {link.label}
                   <span
                     className="absolute -bottom-0.5 left-0 w-0 h-px group-hover:w-full transition-all duration-300"
-                    style={{ background: 'var(--cyan)' }}
+                    style={{ background: 'var(--green)' }}
                   />
                 </button>
               ))}
@@ -108,7 +108,7 @@ export default function Navbar() {
                 href="tel:+2348035429082"
                 className="flex items-center gap-2 text-[11px] font-semibold tracking-wide transition-colors"
                 style={{ color: 'rgba(255,255,255,0.4)' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--cyan)')}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--green)')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}
               >
                 <Phone size={12} />
@@ -118,7 +118,7 @@ export default function Navbar() {
                 onClick={() => handleLink('distributor')}
                 className="inline-flex items-center gap-1.5 px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.1em] transition-all duration-300"
                 style={{
-                  background: 'var(--cyan)',
+                  background: 'var(--green)',
                   color: '#FFFFFF',
                 }}
                 onMouseEnter={(e) => {
@@ -126,7 +126,7 @@ export default function Navbar() {
                   e.currentTarget.style.transform = 'translateY(-1px)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'var(--cyan)'
+                  e.currentTarget.style.background = 'var(--green)'
                   e.currentTarget.style.transform = 'translateY(0)'
                 }}
               >
@@ -162,7 +162,7 @@ export default function Navbar() {
             {/* Thin cyan top line */}
             <div
               className="absolute top-0 left-0 right-0 h-0.5"
-              style={{ background: 'var(--cyan)' }}
+              style={{ background: 'var(--green)' }}
               aria-hidden="true"
             />
 
@@ -181,10 +181,10 @@ export default function Navbar() {
                     borderColor: 'rgba(255,255,255,0.06)',
                   }}
                 >
-                  <span className="group-hover:text-[var(--cyan)] transition-colors">{link.label}</span>
+                  <span className="group-hover:text-[var(--green)] transition-colors">{link.label}</span>
                   <span
                     className="text-[1rem] opacity-0 group-hover:opacity-100 transition-all"
-                    style={{ color: 'var(--cyan)' }}
+                    style={{ color: 'var(--green)' }}
                     aria-hidden="true"
                   >
                     &rarr;
@@ -213,7 +213,7 @@ export default function Navbar() {
               <button
                 onClick={() => handleLink('distributor')}
                 className="w-full py-4 text-[13px] font-bold uppercase tracking-[0.1em]"
-                style={{ background: 'var(--cyan)', color: '#FFFFFF' }}
+                style={{ background: 'var(--green)', color: '#FFFFFF' }}
               >
                 Become a Distributor
               </button>
