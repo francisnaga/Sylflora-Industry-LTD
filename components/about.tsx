@@ -13,22 +13,22 @@ const pillars = [
   {
     title: 'Nationwide Distribution',
     desc: 'Trusted across all 36 states, FCT, and 4 West African countries.',
-    color: '#3FAF75',
+    accent: '#2D8A5A',
   },
   {
     title: 'Hygienic Production',
     desc: '100% virgin wood pulp. ISO-standard manufacturing practices.',
-    color: '#2F80ED',
+    accent: '#2F80ED',
   },
   {
     title: 'Quality Assurance',
     desc: 'Rigorous testing at every stage of our production process.',
-    color: '#3FAF75',
+    accent: '#C89968',
   },
   {
     title: 'Community Impact',
     desc: 'Empowering local employment and nurturing hygiene awareness.',
-    color: '#2F80ED',
+    accent: '#2D8A5A',
   },
 ]
 
@@ -40,60 +40,72 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="section-padding overflow-hidden"
+      className="py-28 md:py-36 lg:py-44 overflow-hidden relative"
       style={{ background: '#FFFCF9' }}
     >
-      <div className="max-w-6xl mx-auto px-5 md:px-8 xl:px-12">
+      {/* Subtle ambient gradient */}
+      <div 
+        className="absolute bottom-0 left-0 w-[600px] h-[600px] pointer-events-none"
+        style={{ 
+          background: 'radial-gradient(circle, rgba(200,153,104,0.04) 0%, transparent 70%)',
+          transform: 'translate(-30%, 30%)'
+        }}
+      />
+      
+      <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-16 relative z-10">
 
-        {/* ── TOP: Split layout ── */}
-        <div className="grid lg:grid-cols-2 gap-16 xl:gap-24 items-center mb-24 md:mb-32">
+        {/* TOP: Split layout with more breathing room */}
+        <div className="grid lg:grid-cols-2 gap-20 xl:gap-28 items-center mb-32 md:mb-40">
 
           {/* Left — imagery composition */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -48 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="relative order-2 lg:order-1"
           >
-            {/* Main image — overflow-hidden on this inner div only */}
+            {/* Main image with editorial treatment */}
             <div
-              className="relative overflow-hidden rounded-2xl aspect-[4/5]"
-              style={{ boxShadow: '0 24px 64px rgba(0,0,0,0.1)' }}
+              className="relative overflow-hidden rounded-3xl aspect-[4/5]"
+              style={{ 
+                boxShadow: '0 32px 80px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.03)' 
+              }}
             >
               <img
                 src={PRODUCTION_IMG}
                 alt="SylFlora production floor with workers"
                 className="w-full h-full object-cover"
               />
-              {/* Subtle overlay */}
+              {/* Cinematic overlay */}
               <div
                 className="absolute inset-0"
                 style={{
-                  background: 'linear-gradient(to top, rgba(15,23,42,0.3) 0%, transparent 50%)',
+                  background: 'linear-gradient(to top, rgba(15,23,42,0.4) 0%, rgba(15,23,42,0.05) 40%, transparent 100%)',
                 }}
               />
             </div>
 
-            {/* Floating Google Maps-style business card */}
+            {/* Floating Google Maps-style business card — refined glassmorphism */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 16 }}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
-              transition={{ delay: 0.35, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute -right-4 md:-right-8 bottom-12 z-20"
+              transition={{ delay: 0.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute -right-4 md:-right-10 bottom-16 z-20"
               style={{
                 filter:
-                  'drop-shadow(0 16px 48px rgba(15,23,42,0.22)) drop-shadow(0 4px 12px rgba(15,23,42,0.12))',
+                  'drop-shadow(0 20px 56px rgba(15,23,42,0.25)) drop-shadow(0 8px 16px rgba(15,23,42,0.12))',
               }}
             >
               <div
-                className="w-[200px] md:w-[240px] rounded-[16px] overflow-hidden"
+                className="w-[220px] md:w-[260px] rounded-[20px] overflow-hidden"
                 style={{
-                  background: '#FFFFFF',
-                  border: '1px solid rgba(234,230,224,0.9)',
+                  background: 'rgba(255,255,255,0.95)',
+                  backdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(234,230,224,0.8)',
                 }}
               >
                 {/* Factory thumbnail */}
-                <div className="h-[90px] md:h-[108px] overflow-hidden">
+                <div className="h-[100px] md:h-[120px] overflow-hidden">
                   <img
                     src={FACTORY_IMG}
                     alt="SylFlora Industries Ltd factory building"
@@ -101,159 +113,161 @@ export default function About() {
                   />
                 </div>
                 {/* Card body */}
-                <div className="px-3.5 pb-3.5 pt-2.5">
+                <div className="px-4 pb-4 pt-3">
                   <p
-                    className="text-[13px] font-extrabold leading-tight"
+                    className="text-[14px] font-extrabold leading-tight"
                     style={{ fontFamily: 'var(--font-display)', color: '#0F172A' }}
                   >
                     SylFlora Industries Ltd
                   </p>
-                  <p className="text-[10px] mt-0.5" style={{ color: '#6B7280' }}>
+                  <p className="text-[11px] mt-1" style={{ color: '#6B7280' }}>
                     Manufacturer &middot; Ogidi, Anambra
                   </p>
                   {/* Stars */}
-                  <div className="flex items-center gap-1 mt-2">
-                    <span className="text-[12px] font-bold" style={{ color: '#0F172A' }}>4.0</span>
+                  <div className="flex items-center gap-1.5 mt-2.5">
+                    <span className="text-[13px] font-bold" style={{ color: '#0F172A' }}>4.0</span>
                     <div className="flex items-center gap-0.5">
                       {[1, 2, 3, 4, 5].map((s) => (
                         <Star
                           key={s}
-                          size={10}
+                          size={11}
                           fill={s <= 4 ? '#F59E0B' : 'none'}
                           stroke={s <= 4 ? '#F59E0B' : '#D1D5DB'}
                           strokeWidth={1.5}
                         />
                       ))}
                     </div>
-                    <span className="text-[10px]" style={{ color: '#9CA3AF' }}>(48)</span>
+                    <span className="text-[11px]" style={{ color: '#9CA3AF' }}>(48)</span>
                   </div>
                   {/* Status */}
                   <div
-                    className="flex items-center justify-between mt-2 pt-2"
+                    className="flex items-center justify-between mt-3 pt-3"
                     style={{ borderTop: '1px solid #F3F4F6' }}
                   >
-                    <div className="flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#3FAF75' }} />
-                      <span className="text-[10px] font-semibold" style={{ color: '#3FAF75' }}>Open</span>
-                      <span className="text-[10px]" style={{ color: '#9CA3AF' }}>&middot; until 6pm</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full" style={{ background: '#2D8A5A' }} />
+                      <span className="text-[11px] font-semibold" style={{ color: '#2D8A5A' }}>Open</span>
+                      <span className="text-[11px]" style={{ color: '#9CA3AF' }}>&middot; until 6pm</span>
                     </div>
-                    <MapPin size={11} style={{ color: '#9CA3AF' }} />
+                    <MapPin size={12} style={{ color: '#9CA3AF' }} />
                   </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Floating "since" badge */}
+            {/* Floating "since" badge — refined */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.85 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="absolute -left-4 md:-left-8 top-12 rounded-2xl px-5 py-4"
+              transition={{ delay: 0.55, duration: 0.7 }}
+              className="absolute -left-4 md:-left-10 top-16 rounded-2xl px-6 py-5"
               style={{
                 background: '#0F172A',
-                boxShadow: '0 8px 32px rgba(15,23,42,0.2)',
+                boxShadow: '0 12px 40px rgba(15,23,42,0.25)',
               }}
             >
               <p
-                className="text-[28px] font-black leading-none"
+                className="text-[32px] md:text-[36px] font-black leading-none"
                 style={{ fontFamily: 'var(--font-display)', color: '#FFFFFF' }}
               >
                 2014
               </p>
-              <p className="text-[11px] font-semibold tracking-widest uppercase mt-1" style={{ color: '#9CA3AF' }}>
+              <p className="text-[10px] font-semibold tracking-[0.15em] uppercase mt-1.5" style={{ color: '#6B7280' }}>
                 Founded
               </p>
             </motion.div>
           </motion.div>
 
-          {/* Right — storytelling */}
+          {/* Right — storytelling with editorial typography */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: 48 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col gap-7 order-1 lg:order-2"
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col gap-8 order-1 lg:order-2"
           >
             <div>
               <p
-                className="text-[11px] font-semibold tracking-[0.14em] uppercase mb-5"
+                className="text-[11px] font-semibold tracking-[0.2em] uppercase mb-6 flex items-center gap-4"
                 style={{ color: '#2D8A5A' }}
               >
+                <span className="h-px w-10" style={{ background: '#2D8A5A' }} />
                 Our Story
               </p>
               <h2
-                className="text-[2.4rem] md:text-[3rem] xl:text-[3.5rem] font-black leading-[1.05] tracking-[-0.025em] text-balance"
+                className="text-[2.75rem] md:text-[3.25rem] xl:text-[3.75rem] font-black leading-[1.02] tracking-[-0.03em] text-balance"
                 style={{ fontFamily: 'var(--font-display)', color: '#0F172A' }}
               >
                 Built for scale.
                 <br />
-                Made with care.
+                <span style={{ color: '#2D8A5A' }}>Made with care.</span>
               </h2>
             </div>
 
-            <p className="text-[17px] leading-relaxed" style={{ color: '#4F4945' }}>
+            <p className="text-[17px] leading-[1.75]" style={{ color: '#4F4945' }}>
               We started with a simple belief: every family deserves access to premium hygiene products without compromise. In 2014, we built our first production line in Anambra State. Today, millions rely on SylFlora.
             </p>
 
-            <p className="text-[17px] leading-relaxed" style={{ color: '#4F4945' }}>
+            <p className="text-[17px] leading-[1.75]" style={{ color: '#4F4945' }}>
               Every product uses 100% virgin wood pulp. We don&apos;t cut corners. We don&apos;t settle. And we never will. That commitment is why distributors across 36 states trust us to show up, deliver quality, and care about the families using our products.
             </p>
 
-            {/* Quote */}
+            {/* Quote — refined editorial styling */}
             <div
-              className="border-l-2 pl-5 py-1"
-              style={{ borderColor: '#3FAF75' }}
+              className="border-l-[3px] pl-6 py-2 mt-2"
+              style={{ borderColor: '#2D8A5A' }}
             >
-              <p className="text-[15px] italic leading-relaxed" style={{ color: '#6B7280' }}>
+              <p className="text-[16px] italic leading-[1.7]" style={{ color: '#6B7280' }}>
                 &ldquo;To actualize the true human nature through unremitting creativity &mdash; deciphering
                 the existing human problems and imminent threats to existence.&rdquo;
               </p>
-              <p className="text-[12px] font-semibold mt-2" style={{ color: '#9CA3AF' }}>
+              <p className="text-[11px] font-bold tracking-[0.1em] uppercase mt-3" style={{ color: '#A69D93' }}>
                 Mission Statement
               </p>
             </div>
           </motion.div>
         </div>
 
-        {/* ── BOTTOM: Pillars ── */}
+        {/* PILLARS — refined with varied accents */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.3, duration: 0.7 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
         >
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {pillars.map((p, i) => (
               <motion.div
                 key={p.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.4 + i * 0.1, duration: 0.5 }}
-                className="group flex flex-col gap-3 p-6 rounded-2xl transition-all duration-300"
+                transition={{ delay: 0.45 + i * 0.1, duration: 0.6 }}
+                className="group flex flex-col gap-4 p-7 rounded-2xl transition-all duration-500"
                 style={{
-                  background: '#F9F9F8',
-                  border: '1px solid #F0F0EE',
+                  background: '#FFFFFF',
+                  border: '1px solid #EAE6E0',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#FFFFFF'
-                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.08)'
-                  e.currentTarget.style.transform = 'translateY(-3px)'
+                  e.currentTarget.style.boxShadow = '0 12px 40px rgba(0,0,0,0.08)'
+                  e.currentTarget.style.transform = 'translateY(-4px)'
+                  e.currentTarget.style.borderColor = p.accent + '40'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#F9F9F8'
-                  e.currentTarget.style.boxShadow = 'none'
+                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.02)'
                   e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.borderColor = '#EAE6E0'
                 }}
               >
                 <div
-                  className="w-2.5 h-2.5 rounded-full"
-                  style={{ background: p.color }}
+                  className="w-3 h-3 rounded-full transition-transform duration-300 group-hover:scale-125"
+                  style={{ background: p.accent }}
                 />
                 <h3
-                  className="text-[15px] font-bold leading-tight"
+                  className="text-[16px] font-bold leading-tight"
                   style={{ color: '#0F172A' }}
                 >
                   {p.title}
                 </h3>
-                <p className="text-[13px] leading-relaxed" style={{ color: '#6B7280' }}>
+                <p className="text-[14px] leading-relaxed" style={{ color: '#6B7280' }}>
                   {p.desc}
                 </p>
               </motion.div>
@@ -261,13 +275,16 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* ── Community image ── */}
+        {/* COMMUNITY IMAGE — cinematic with overlay */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="mt-16 md:mt-24 relative overflow-hidden rounded-3xl"
-          style={{ height: '400px', boxShadow: '0 24px 64px rgba(0,0,0,0.1)' }}
+          transition={{ delay: 0.6, duration: 0.9 }}
+          className="mt-20 md:mt-28 relative overflow-hidden rounded-[2rem]"
+          style={{ 
+            height: '460px', 
+            boxShadow: '0 32px 80px rgba(0,0,0,0.12)' 
+          }}
         >
           <img
             src={CHILDREN_IMG}
@@ -275,21 +292,22 @@ export default function About() {
             className="w-full h-full object-cover object-top"
           />
           <div
-            className="absolute inset-0 flex items-end p-8 md:p-12"
+            className="absolute inset-0 flex items-end p-10 md:p-14"
             style={{
               background:
-                'linear-gradient(to top, rgba(15,23,42,0.8) 0%, rgba(15,23,42,0.2) 50%, transparent 100%)',
+                'linear-gradient(to top, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0.3) 45%, transparent 100%)',
             }}
           >
             <div>
               <p
-                className="text-[11px] font-semibold tracking-[0.14em] uppercase mb-2"
-                style={{ color: '#3FAF75' }}
+                className="text-[11px] font-semibold tracking-[0.2em] uppercase mb-3 flex items-center gap-3"
+                style={{ color: '#4FA870' }}
               >
+                <span className="w-6 h-px" style={{ background: '#4FA870' }} />
                 Community Impact
               </p>
               <p
-                className="text-[22px] md:text-[28px] font-black leading-tight text-balance"
+                className="text-[1.5rem] md:text-[2rem] font-black leading-[1.15] text-balance max-w-xl"
                 style={{ fontFamily: 'var(--font-display)', color: '#FFFFFF' }}
               >
                 Nurturing hygiene awareness,<br className="hidden md:block" /> one generation at a time.

@@ -17,9 +17,9 @@ export default function Hero() {
     target: ref,
     offset: ['start start', 'end start'],
   })
-  const rawY = useTransform(scrollYProgress, [0, 1], [0, 80])
-  const y = useSpring(rawY, { stiffness: 80, damping: 20 })
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+  const rawY = useTransform(scrollYProgress, [0, 1], [0, 120])
+  const y = useSpring(rawY, { stiffness: 50, damping: 30 })
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0])
 
   useEffect(() => {
     setMounted(true)
@@ -32,40 +32,64 @@ export default function Hero() {
     <section
       id="home"
       ref={ref}
-      className="relative min-h-screen overflow-hidden flex items-center"
-      style={{ background: '#FFFCF9' }}
+      className="relative min-h-[100svh] overflow-hidden flex items-center"
+      style={{ background: 'var(--background)' }}
     >
-      {/* Ambient background — minimal, intentional */}
-      <div
-        className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(45,138,90,0.06) 0%, transparent 70%)',
-        }}
-      />
+      {/* Ambient background layers — cinematic depth */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Primary ambient glow — top right */}
+        <div
+          className="absolute -top-[20%] -right-[10%] w-[800px] h-[800px] rounded-full opacity-40"
+          style={{
+            background: 'radial-gradient(circle, rgba(45,138,90,0.08) 0%, rgba(45,138,90,0.02) 50%, transparent 70%)',
+          }}
+        />
+        {/* Secondary warmth — bottom left */}
+        <div
+          className="absolute -bottom-[30%] -left-[15%] w-[600px] h-[600px] rounded-full opacity-30"
+          style={{
+            background: 'radial-gradient(circle, rgba(200,153,104,0.06) 0%, transparent 60%)',
+          }}
+        />
+        {/* Subtle center light */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full opacity-20"
+          style={{
+            background: 'radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 50%)',
+          }}
+        />
+      </div>
 
       {/* Background family image — right side bleed, desktop only */}
       <div className="absolute inset-0 pointer-events-none hidden lg:block">
         <motion.div
           style={{ y }}
-          className="absolute right-0 top-0 w-[52%] h-full"
+          className="absolute right-0 top-0 w-[55%] h-full"
         >
           <div
             className="w-full h-full bg-cover bg-center"
             style={{ backgroundImage: `url(${FAMILY_IMG})` }}
           />
-          {/* Fade out left edge into page background */}
+          {/* Premium multi-layer fade */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(to right, #FFFCF9 0%, rgba(255,252,249,0.6) 25%, transparent 60%)',
+                'linear-gradient(to right, var(--background) 0%, rgba(255,252,249,0.85) 15%, rgba(255,252,249,0.4) 35%, transparent 60%)',
             }}
           />
-          {/* Subtle bottom fade */}
+          {/* Soft vignette top */}
           <div
-            className="absolute bottom-0 inset-x-0 h-40"
+            className="absolute top-0 inset-x-0 h-48"
             style={{
-              background: 'linear-gradient(to top, #FFFCF9, transparent)',
+              background: 'linear-gradient(to bottom, rgba(255,252,249,0.6), transparent)',
+            }}
+          />
+          {/* Elegant bottom fade */}
+          <div
+            className="absolute bottom-0 inset-x-0 h-56"
+            style={{
+              background: 'linear-gradient(to top, var(--background), transparent)',
             }}
           />
         </motion.div>
@@ -74,41 +98,41 @@ export default function Hero() {
       {/* Main content */}
       <motion.div
         style={{ opacity }}
-        className="relative z-10 w-full max-w-7xl mx-auto px-5 md:px-8 xl:px-12 pt-28 pb-20 md:pt-36 md:pb-28"
+        className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-10 xl:px-16 pt-32 pb-80 md:pt-40 md:pb-32 lg:pt-44 lg:pb-36"
       >
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-0 items-center">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-8 items-center">
 
           {/* ── LEFT COLUMN ── */}
-          <div className="flex flex-col gap-8 max-w-xl">
+          <div className="flex flex-col gap-10 max-w-2xl">
 
-            {/* Eyebrow pill */}
+            {/* Eyebrow — refined editorial style */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-flex items-center gap-2 self-start"
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-flex items-center gap-3 self-start"
             >
               <span
-                className="w-5 h-px"
-                style={{ background: '#2D8A5A' }}
+                className="w-8 h-[1.5px]"
+                style={{ background: 'var(--brand-green)' }}
               />
               <span
-                className="text-[11px] font-semibold tracking-[0.14em] uppercase"
-                style={{ color: '#2D8A5A' }}
+                className="text-[11px] font-semibold tracking-[0.2em] uppercase"
+                style={{ color: 'var(--brand-green)' }}
               >
                 Trusted by Millions
               </span>
             </motion.div>
 
-            {/* Main headline */}
+            {/* Main headline — cinematic scale */}
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display text-[3.2rem] sm:text-[4rem] md:text-[4.8rem] lg:text-[5.2rem] xl:text-[5.8rem] font-black leading-[0.95] tracking-[-0.03em] text-balance"
+              transition={{ duration: 1.2, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+              className="font-display text-[3.5rem] sm:text-[4.5rem] md:text-[5.5rem] lg:text-[6rem] xl:text-[7rem] font-black leading-[0.92] tracking-[-0.035em] text-balance"
               style={{
                 fontFamily: 'var(--font-display)',
-                color: '#1A1410',
+                color: 'var(--foreground)',
               }}
             >
               Pure Quality.
@@ -116,9 +140,9 @@ export default function Hero() {
               Real Care.
               <br />
               <span
-                className="relative"
+                className="relative inline-block"
                 style={{
-                  background: 'linear-gradient(135deg, #2D8A5A 0%, #1F5F3F 100%)',
+                  background: 'linear-gradient(135deg, var(--brand-green) 0%, var(--brand-green-dark) 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -128,230 +152,286 @@ export default function Hero() {
               </span>
             </motion.h1>
 
-            {/* Subtext */}
+            {/* Subtext — refined typography */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[17px] leading-relaxed max-w-md"
-              style={{ color: '#6B6560' }}
+              transition={{ duration: 1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="text-lg md:text-xl leading-relaxed max-w-lg"
+              style={{ color: 'var(--neutral-600)' }}
             >
               Made from 100% virgin wood pulp. Trusted by families across Nigeria and West Africa.
             </motion.p>
 
-            {/* CTAs */}
+            {/* CTAs — premium buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col sm:flex-row gap-4"
+              transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col sm:flex-row gap-4 pt-2"
             >
               <button
                 onClick={() => scrollTo('products')}
-                className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-[14px] font-semibold tracking-wide transition-all duration-300 min-h-[44px]"
+                className="group inline-flex items-center justify-center gap-3 px-10 py-5 rounded-full text-[15px] font-semibold tracking-wide transition-all duration-500 min-h-[56px]"
                 style={{
-                  background: '#1A1410',
-                  color: '#FFFCF9',
+                  background: 'var(--foreground)',
+                  color: 'var(--background)',
+                  boxShadow: '0 4px 20px rgba(26,20,16,0.15)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#2D8A5A'
+                  e.currentTarget.style.background = 'var(--brand-green)'
+                  e.currentTarget.style.boxShadow = '0 8px 30px rgba(45,138,90,0.25)'
+                  e.currentTarget.style.transform = 'translateY(-2px)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#1A1410'
+                  e.currentTarget.style.background = 'var(--foreground)'
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(26,20,16,0.15)'
+                  e.currentTarget.style.transform = 'translateY(0)'
                 }}
               >
                 Explore Products
-                <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">
+                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
                   &rarr;
                 </span>
               </button>
               <button
                 onClick={() => scrollTo('distributor')}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-[14px] font-semibold tracking-wide border-2 transition-all duration-300 min-h-[44px]"
+                className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full text-[15px] font-semibold tracking-wide border-2 transition-all duration-500 min-h-[56px]"
                 style={{
-                  borderColor: '#EAE6E0',
-                  color: '#1A1410',
+                  borderColor: 'var(--neutral-300)',
+                  color: 'var(--foreground)',
                   background: 'transparent',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#2D8A5A'
-                  e.currentTarget.style.color = '#2D8A5A'
+                  e.currentTarget.style.borderColor = 'var(--brand-green)'
+                  e.currentTarget.style.color = 'var(--brand-green)'
+                  e.currentTarget.style.transform = 'translateY(-2px)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = '#EAE6E0'
-                  e.currentTarget.style.color = '#1A1410'
+                  e.currentTarget.style.borderColor = 'var(--neutral-300)'
+                  e.currentTarget.style.color = 'var(--foreground)'
+                  e.currentTarget.style.transform = 'translateY(0)'
                 }}
               >
-                Become Distributor
+                Become a Distributor
               </button>
             </motion.div>
 
-            {/* Trust strip */}
+            {/* Trust strip — elegant social proof */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={mounted ? { opacity: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.55 }}
-              className="flex items-center gap-4 pt-2"
+              transition={{ duration: 1, delay: 0.8 }}
+              className="flex items-center gap-5 pt-4"
             >
-              <div className="flex -space-x-2">
+              <div className="flex -space-x-3">
                 {[TISSUE_IMG, DIAPER_IMG, FACTORY_IMG].map((src, i) => (
                   <div
                     key={i}
-                    className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-white"
+                    className="w-10 h-10 rounded-full overflow-hidden ring-[3px] ring-white shadow-md"
                     style={{ zIndex: 3 - i }}
                   >
                     <img src={src} alt="" className="w-full h-full object-cover" aria-hidden="true" />
                   </div>
                 ))}
               </div>
-              <p className="text-[13px]" style={{ color: '#6B7280' }}>
-                <span className="font-semibold" style={{ color: '#0F172A' }}>30+ products</span> trusted by millions
-              </p>
+              <div className="flex flex-col">
+                <span className="text-sm font-semibold" style={{ color: 'var(--foreground)' }}>
+                  30+ Products
+                </span>
+                <span className="text-xs" style={{ color: 'var(--neutral-500)' }}>
+                  Trusted by millions of families
+                </span>
+              </div>
             </motion.div>
           </div>
 
-          {/* ── RIGHT COLUMN — floating composition ── */}
-          <div className="relative hidden lg:flex justify-end items-end pb-8 pr-4">
-            {/* Floating Trust Card — inspired by the Google Maps card image */}
+          {/* ── RIGHT COLUMN — premium floating composition ── */}
+          <div className="relative hidden lg:flex justify-center items-center min-h-[500px]">
+            
+            {/* Floating Trust Card — refined glassmorphism */}
             <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.96 }}
+              initial={{ opacity: 0, y: 50, scale: 0.92 }}
               animate={mounted ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className="relative z-20"
-              style={{
-                filter:
-                  'drop-shadow(0 20px 60px rgba(15,23,42,0.12)) drop-shadow(0 4px 16px rgba(15,23,42,0.08))',
-              }}
             >
               <div
-                className="w-[300px] rounded-2xl overflow-hidden"
+                className="w-[320px] rounded-3xl overflow-hidden"
                 style={{
-                  background: 'rgba(255,255,255,0.92)',
-                  backdropFilter: 'blur(20px)',
-                  WebkitBackdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255,255,255,0.6)',
+                  background: 'rgba(255,255,255,0.85)',
+                  backdropFilter: 'blur(40px)',
+                  WebkitBackdropFilter: 'blur(40px)',
+                  border: '1px solid rgba(255,255,255,0.7)',
+                  boxShadow: `
+                    0 0 0 1px rgba(255,255,255,0.5),
+                    0 2px 4px rgba(0,0,0,0.02),
+                    0 8px 16px rgba(0,0,0,0.04),
+                    0 24px 48px rgba(0,0,0,0.06),
+                    0 48px 80px rgba(15,23,42,0.08)
+                  `,
                 }}
               >
-                {/* Factory photo top */}
-                <div className="relative h-[140px] overflow-hidden">
+                {/* Factory photo */}
+                <div className="relative h-[160px] overflow-hidden">
                   <img
                     src={FACTORY_IMG}
                     alt="SylFlora Industries factory"
                     className="w-full h-full object-cover"
                   />
+                  {/* Subtle overlay for depth */}
+                  <div 
+                    className="absolute inset-0"
+                    style={{
+                      background: 'linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.1) 100%)',
+                    }}
+                  />
                 </div>
 
-                {/* Card info */}
-                <div className="p-5">
+                {/* Card info — refined spacing */}
+                <div className="p-6">
                   <p
-                    className="text-[16px] font-extrabold leading-tight"
-                    style={{ fontFamily: 'var(--font-display)', color: '#0F172A' }}
+                    className="text-[17px] font-extrabold leading-tight"
+                    style={{ fontFamily: 'var(--font-display)', color: 'var(--foreground)' }}
                   >
                     SylFlora Industries Ltd
                   </p>
-                  <p className="text-[12px] mt-0.5" style={{ color: '#6B7280' }}>
+                  <p className="text-[13px] mt-1" style={{ color: 'var(--neutral-500)' }}>
                     Manufacturer &middot; Ogidi, Anambra
                   </p>
 
-                  {/* Stars */}
-                  <div className="flex items-center gap-1.5 mt-3">
-                    <span className="text-[14px] font-bold" style={{ color: '#0F172A' }}>4.0</span>
+                  {/* Stars — refined */}
+                  <div className="flex items-center gap-2 mt-4">
+                    <span className="text-[15px] font-bold" style={{ color: 'var(--foreground)' }}>4.0</span>
                     <div className="flex items-center gap-0.5">
                       {[1, 2, 3, 4, 5].map((s) => (
                         <Star
                           key={s}
-                          size={13}
+                          size={14}
                           fill={s <= 4 ? '#F59E0B' : 'none'}
                           stroke={s <= 4 ? '#F59E0B' : '#D1D5DB'}
                           strokeWidth={1.5}
                         />
                       ))}
                     </div>
-                    <span className="text-[12px]" style={{ color: '#9CA3AF' }}>(48)</span>
+                    <span className="text-[12px]" style={{ color: 'var(--neutral-400)' }}>(48)</span>
                   </div>
 
-                  {/* Status */}
-                  <div className="flex items-center justify-between mt-3 pt-3" style={{ borderTop: '1px solid #F3F4F6' }}>
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-[#3FAF75]" />
-                      <span className="text-[12px] font-semibold" style={{ color: '#3FAF75' }}>Open</span>
-                      <span className="text-[12px]" style={{ color: '#9CA3AF' }}>&middot; until 6pm</span>
+                  {/* Status — refined divider */}
+                  <div 
+                    className="flex items-center justify-between mt-4 pt-4" 
+                    style={{ borderTop: '1px solid var(--neutral-200)' }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span 
+                        className="w-2 h-2 rounded-full"
+                        style={{ background: 'var(--brand-green)' }}
+                      />
+                      <span className="text-[13px] font-semibold" style={{ color: 'var(--brand-green)' }}>
+                        Open
+                      </span>
+                      <span className="text-[12px]" style={{ color: 'var(--neutral-400)' }}>
+                        &middot; until 6pm
+                      </span>
                     </div>
-                    <MapPin size={14} style={{ color: '#9CA3AF' }} />
+                    <MapPin size={15} style={{ color: 'var(--neutral-400)' }} />
                   </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Floating product — tissue */}
+            {/* Floating product — tissue (bottom left) */}
             <motion.div
-              initial={{ opacity: 0, x: 20, y: 20 }}
+              initial={{ opacity: 0, x: 30, y: 30 }}
               animate={mounted ? { opacity: 1, x: 0, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="animate-float-delayed absolute bottom-[-20px] left-[20px] z-10 w-[160px] rounded-2xl overflow-hidden"
+              transition={{ duration: 1.2, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute bottom-[10%] left-[5%] z-10 w-[180px] rounded-2xl overflow-hidden"
               style={{
-                filter: 'drop-shadow(0 12px 40px rgba(15,23,42,0.15))',
+                boxShadow: `
+                  0 8px 16px rgba(0,0,0,0.06),
+                  0 24px 48px rgba(0,0,0,0.1),
+                  0 48px 80px rgba(15,23,42,0.12)
+                `,
+                animation: 'float-delayed 8s ease-in-out infinite',
               }}
             >
               <img
                 src={TISSUE_IMG}
                 alt="Royal Flora tissue roll"
-                className="w-full h-full object-cover"
+                className="w-full h-auto"
               />
             </motion.div>
 
-            {/* Floating product — diaper */}
+            {/* Floating product — diaper (top right) */}
             <motion.div
-              initial={{ opacity: 0, x: -20, y: -20 }}
+              initial={{ opacity: 0, x: -30, y: -30 }}
               animate={mounted ? { opacity: 1, x: 0, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute top-[60px] right-[20px] z-10 w-[140px] rounded-2xl overflow-hidden"
+              transition={{ duration: 1.2, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute top-[5%] right-[8%] z-10 w-[150px] rounded-2xl overflow-hidden"
               style={{
-                filter: 'drop-shadow(0 12px 40px rgba(15,23,42,0.12))',
+                boxShadow: `
+                  0 8px 16px rgba(0,0,0,0.06),
+                  0 24px 48px rgba(0,0,0,0.1),
+                  0 48px 80px rgba(15,23,42,0.1)
+                `,
+                animation: 'float 7s ease-in-out infinite',
               }}
             >
               <img
                 src={DIAPER_IMG}
                 alt="SylFlora baby diaper"
-                className="w-full h-full object-cover"
+                className="w-full h-auto"
               />
             </motion.div>
+
+            {/* Ambient glow behind card */}
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full pointer-events-none -z-10"
+              style={{
+                background: 'radial-gradient(circle, rgba(45,138,90,0.06) 0%, transparent 60%)',
+              }}
+            />
           </div>
         </div>
       </motion.div>
 
-      {/* Mobile hero image — shown only on smaller screens */}
-      <div className="absolute bottom-0 inset-x-0 h-56 lg:hidden pointer-events-none overflow-hidden">
+      {/* Mobile hero image — refined with stronger gradient */}
+      <div className="absolute bottom-0 inset-x-0 h-72 lg:hidden pointer-events-none overflow-hidden -z-10">
         <div
-          className="w-full h-full bg-cover bg-top"
+          className="w-full h-full bg-cover bg-center"
           style={{ backgroundImage: `url(${FAMILY_IMG})` }}
         />
+        {/* Stronger gradient to ensure text readability */}
         <div
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(to bottom, #FFFCF9 0%, rgba(255,252,249,0.3) 40%, transparent 100%)',
+            background: 'linear-gradient(to bottom, var(--background) 0%, rgba(255,252,249,0.95) 30%, rgba(255,252,249,0.6) 60%, transparent 100%)',
           }}
         />
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — refined */}
       <motion.button
         onClick={() => scrollTo('trust-stats')}
         initial={{ opacity: 0 }}
         animate={mounted ? { opacity: 1 } : {}}
-        transition={{ delay: 1.4 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-20"
+        transition={{ delay: 1.8, duration: 1 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 cursor-pointer z-20 group"
         aria-label="Scroll down"
       >
-        <span className="text-[10px] tracking-[0.18em] uppercase font-semibold" style={{ color: '#9CA3AF' }}>
+        <span 
+          className="text-[10px] tracking-[0.2em] uppercase font-semibold transition-colors duration-300 group-hover:text-[var(--brand-green)]" 
+          style={{ color: 'var(--neutral-400)' }}
+        >
           Scroll
         </span>
         <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ color: '#9CA3AF' }}
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="transition-colors duration-300 group-hover:text-[var(--brand-green)]"
+          style={{ color: 'var(--neutral-400)' }}
         >
-          <ChevronDown size={18} />
+          <ChevronDown size={20} strokeWidth={1.5} />
         </motion.div>
       </motion.button>
     </section>
