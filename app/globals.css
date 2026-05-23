@@ -37,6 +37,8 @@
   --green: #1B7A4C;
   --green-light: #27A361;
   --green-dark: #14613B;
+  --cyan: #1B7A4C;
+  --cyan-light: #27A361;
   --white: #FFFFFF;
   --off-white: #F8FAFB;
 
@@ -203,8 +205,27 @@
   border-radius: 1px;
 }
 
+.rule-cyan {
+  display: inline-block;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--green);
+  border-radius: 1px;
+}
+
 /* Corporate tag */
 .tag-green {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.tag-cyan {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
