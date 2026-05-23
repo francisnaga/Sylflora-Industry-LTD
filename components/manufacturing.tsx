@@ -2,50 +2,50 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { Cog, ShieldCheck, BarChart3, Globe2 } from 'lucide-react'
 
 const FACTORY_MAIN = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/66e1bef6-8355-4606-a861-6076ec220833.jpeg'
-
-const galleryItems = [
-  {
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6cacf79a-d3ae-4e16-97a7-4883632b7d6e.jpeg',
-    alt: 'High precision paper maker with Sylflora Technology branding',
-    caption: 'High Precision Paper Maker',
-    span: 'col-span-1',
-  },
-  {
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c5d8dd0e-3ac2-4847-b465-733eedf447ae.jpeg',
-    alt: 'Industrial slitting machine for tissue production',
-    caption: 'Industrial Slitting Equipment',
-    span: 'col-span-1',
-  },
-  {
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/00e25102-7119-467e-ac3e-4487beb113b4.jpeg',
-    alt: 'Aerial view of SylFlora industrial campus',
-    caption: 'Production Campus',
-    span: 'col-span-1 md:col-span-2',
-  },
-]
+const MACHINE_1 = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6cacf79a-d3ae-4e16-97a7-4883632b7d6e.jpeg'
+const MACHINE_2 = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c5d8dd0e-3ac2-4847-b465-733eedf447ae.jpeg'
+const CAMPUS_AERIAL = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/00e25102-7119-467e-ac3e-4487beb113b4.jpeg'
+const VEHICLE_IMG = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5639-x2hwxIN2lbXJLILGyeMXXfmHXEw2Bl.jpeg'
 
 const capabilities = [
   {
+    icon: Cog,
     title: 'Virgin Pulp Manufacturing',
-    desc: '100% virgin wood pulp used across all product lines.',
+    desc: '100% virgin wood pulp used across all product lines — no recycled filler material.',
     num: '01',
   },
   {
+    icon: Cog,
     title: 'Advanced Machinery',
-    desc: 'High-precision, computer-controlled production equipment.',
+    desc: 'High-precision, computer-controlled production equipment from leading manufacturers.',
     num: '02',
   },
   {
+    icon: ShieldCheck,
     title: 'Quality Control',
-    desc: 'ISO-standard testing at every stage of the production cycle.',
+    desc: 'Rigorous ISO-standard testing at every stage of the production cycle.',
     num: '03',
   },
   {
-    title: 'Scale & Reliability',
-    desc: 'Capacity to serve national and international demand.',
+    icon: BarChart3,
+    title: 'Production Scale',
+    desc: 'Capacity to serve national retail demand and international export requirements.',
     num: '04',
+  },
+  {
+    icon: Globe2,
+    title: 'Distribution Ready',
+    desc: 'Warehousing and logistics infrastructure built for nationwide and West African supply.',
+    num: '05',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Certified Operations',
+    desc: 'ONICCIMA-recognized facility with award-winning production standards.',
+    num: '06',
   },
 ]
 
@@ -57,162 +57,239 @@ export default function Manufacturing() {
     <section
       id="manufacturing"
       ref={ref}
-      className="py-28 md:py-36 lg:py-44 relative"
-      style={{ background: '#FAFAF8' }}
+      className="py-24 md:py-32 relative overflow-hidden"
+      style={{ background: 'var(--off-white)' }}
     >
-      {/* Subtle ambient */}
-      <div 
-        className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{ 
-          background: 'radial-gradient(circle, rgba(47,128,237,0.02) 0%, transparent 60%)',
-          transform: 'translate(30%, -30%)'
-        }}
-      />
-      
-      <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-16 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-16">
 
-        {/* Header — editorial asymmetric layout */}
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-20"
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-14"
         >
-          <p
-            className="text-[11px] font-semibold tracking-[0.2em] uppercase mb-6 flex items-center gap-4"
-            style={{ color: '#2D8A5A' }}
-          >
-            <span className="h-px w-10" style={{ background: '#2D8A5A' }} />
-            Production Excellence
+          <p className="tag-cyan mb-5">
+            <span className="rule-cyan" aria-hidden="true" />
+            Production Infrastructure
           </p>
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <h2
-              className="text-[2.75rem] md:text-[3.25rem] xl:text-[3.75rem] font-black leading-[1.02] tracking-[-0.03em] text-balance"
-              style={{ fontFamily: 'var(--font-display)', color: '#0F172A' }}
+              className="text-[2.5rem] md:text-[3rem] xl:text-[3.5rem] font-black leading-[1.0] tracking-[-0.025em] text-balance"
+              style={{ fontFamily: 'var(--font-display)', color: 'var(--navy)' }}
             >
-              Inside Our
+              Industrial-Scale
               <br />
-              <span style={{ color: '#2F80ED' }}>Production Process</span>
+              <span style={{ color: 'var(--cyan)' }}>Manufacturing Operations</span>
             </h2>
             <p
-              className="text-[16px] leading-relaxed max-w-md lg:pb-2"
-              style={{ color: '#6B7280' }}
+              className="text-[15px] leading-relaxed max-w-md"
+              style={{ color: 'var(--neutral-500)' }}
             >
-              A state-of-the-art manufacturing campus in Anambra State, built for
-              precision, scale, and world-class hygiene standards.
+              A state-of-the-art manufacturing campus in Anambra State, Nigeria. Built for
+              precision, scale, and world-class hygiene production standards.
             </p>
           </div>
         </motion.div>
 
-        {/* MAIN FACTORY IMAGE — cinematic treatment */}
+        {/* MAIN FACTORY — full-width cinematic banner */}
         <motion.div
-          initial={{ opacity: 0, y: 32 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mb-6 rounded-[2rem] overflow-hidden"
-          style={{ 
-            height: '500px', 
-            boxShadow: '0 32px 80px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.03)' 
-          }}
+          transition={{ delay: 0.1, duration: 0.8 }}
+          className="relative overflow-hidden mb-4"
+          style={{ height: '460px' }}
         >
           <img
             src={FACTORY_MAIN}
-            alt="SylFlora Industry LTD factory building — Nurturing a Hygienic Generation"
+            alt="SylFlora Industries Ltd — Nurturing a Hygienic Generation. Factory building, Ogidi Anambra State"
             className="w-full h-full object-cover object-center"
           />
-          {/* Cinematic depth overlay */}
           <div
             className="absolute inset-0"
             style={{
-              background:
-                'linear-gradient(to bottom, rgba(15,23,42,0.15) 0%, rgba(15,23,42,0.03) 40%, rgba(15,23,42,0.4) 100%)',
+              background: 'linear-gradient(to top, rgba(8,13,24,0.7) 0%, rgba(8,13,24,0.1) 50%, transparent 100%)',
             }}
+            aria-hidden="true"
           />
-
-          {/* Est. badge — refined placement */}
-          <div className="absolute bottom-8 right-8">
-            <p 
-              className="text-[11px] font-bold tracking-[0.15em] uppercase"
-              style={{ color: 'rgba(255,255,255,0.8)' }}
+          {/* Factory label */}
+          <div className="absolute bottom-0 left-0 right-0 px-8 py-6 flex items-end justify-between">
+            <div>
+              <p
+                className="text-[10px] font-bold tracking-[0.18em] uppercase mb-1"
+                style={{ color: 'var(--cyan)' }}
+              >
+                Main Facility
+              </p>
+              <p
+                className="text-[18px] md:text-[22px] font-black text-white"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                SylFlora Industries Ltd — Ogidi, Anambra State
+              </p>
+            </div>
+            <div
+              className="hidden md:flex items-center gap-2 px-4 py-2"
+              style={{ background: 'rgba(0,168,198,0.15)', border: '1px solid rgba(0,168,198,0.3)' }}
             >
-              Est. 2014 &mdash; Anambra State, Nigeria
-            </p>
+              <span
+                className="w-1.5 h-1.5 rounded-full"
+                style={{ background: 'var(--cyan)' }}
+                aria-hidden="true"
+              />
+              <span
+                className="text-[11px] font-bold tracking-[0.12em] uppercase"
+                style={{ color: 'var(--cyan)' }}
+              >
+                Est. 2014 &mdash; Active
+              </span>
+            </div>
           </div>
-          
-          {/* Subtle vignette corners */}
-          <div 
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: 'radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.15) 100%)'
-            }}
-          />
         </motion.div>
 
-        {/* SECONDARY GALLERY — varied sizes */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
-          {galleryItems.map((item, i) => (
+        {/* Secondary gallery — 3-column grid */}
+        <div className="grid grid-cols-3 gap-4 mb-16">
+          {[
+            { src: MACHINE_1, alt: 'High precision paper-making machinery — SylFlora Technology', label: 'Paper Making' },
+            { src: MACHINE_2, alt: 'Industrial tissue slitting and cutting machine', label: 'Slitting Equipment' },
+            { src: CAMPUS_AERIAL, alt: 'Aerial view of SylFlora industrial production campus', label: 'Production Campus' },
+          ].map((item, i) => (
             <motion.div
-              key={item.alt}
-              initial={{ opacity: 0, y: 24 }}
+              key={item.label}
+              initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.25 + i * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className={`relative overflow-hidden rounded-2xl group ${item.span}`}
-              style={{ height: '180px' }}
+              transition={{ delay: 0.2 + i * 0.08, duration: 0.6 }}
+              className="relative overflow-hidden group img-reveal cursor-default"
+              style={{ height: '160px' }}
             >
               <img
                 src={item.src}
                 alt={item.alt}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
               <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-5"
-                style={{ background: 'linear-gradient(to top, rgba(15,23,42,0.75) 0%, transparent 60%)' }}
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-4"
+                style={{ background: 'linear-gradient(to top, rgba(8,13,24,0.8) 0%, transparent 60%)' }}
               >
-                <p className="text-[12px] font-semibold text-white">{item.caption}</p>
+                <p className="text-[11px] font-bold tracking-[0.1em] uppercase text-white">{item.label}</p>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Capabilities grid — refined with numbers */}
+        {/* Vehicle / brand presence */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.4, duration: 0.7 }}
+          transition={{ delay: 0.3, duration: 0.7 }}
+          className="relative overflow-hidden mb-16"
+          style={{ height: '220px' }}
         >
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
-            {capabilities.map((cap, i) => (
-              <motion.div
-                key={cap.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.5 + i * 0.1, duration: 0.6 }}
-                className="flex flex-col gap-4 group"
+          <img
+            src={VEHICLE_IMG}
+            alt="SylFlora branded vehicle — We Don't Compete, We Lead"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: 'center 40%' }}
+          />
+          <div
+            className="absolute inset-0 flex items-center px-8 md:px-14"
+            style={{
+              background: 'linear-gradient(to right, rgba(8,13,24,0.85) 0%, rgba(8,13,24,0.5) 50%, transparent 80%)',
+            }}
+          >
+            <div>
+              <p
+                className="text-[11px] font-bold tracking-[0.18em] uppercase mb-2"
+                style={{ color: 'var(--cyan)' }}
               >
-                <p
-                  className="text-[11px] font-bold tracking-[0.15em] uppercase transition-colors duration-300"
-                  style={{ color: '#D9D3CB' }}
-                >
-                  {cap.num}
-                </p>
-                <h3
-                  className="text-[17px] font-bold leading-snug"
-                  style={{ color: '#0F172A' }}
-                >
-                  {cap.title}
-                </h3>
-                <p className="text-[14px] leading-relaxed" style={{ color: '#6B7280' }}>
-                  {cap.desc}
-                </p>
-                <div
-                  className="h-px w-12 transition-all duration-500 group-hover:w-20"
-                  style={{ background: '#2D8A5A' }}
-                />
-              </motion.div>
-            ))}
+                Brand Operations
+              </p>
+              <p
+                className="text-[1.5rem] md:text-[2rem] font-black text-white text-balance"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                We Don&apos;t Compete.
+                <br />We Lead.
+              </p>
+            </div>
           </div>
         </motion.div>
+
+        {/* Capabilities grid */}
+        <div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.35, duration: 0.6 }}
+            className="mb-10"
+          >
+            <p className="tag-cyan mb-3">
+              <span className="rule-cyan" aria-hidden="true" />
+              Core Capabilities
+            </p>
+            <h3
+              className="text-[1.5rem] md:text-[1.75rem] font-black"
+              style={{ fontFamily: 'var(--font-display)', color: 'var(--navy)' }}
+            >
+              What Our Facility Delivers
+            </h3>
+          </motion.div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l"
+            style={{ borderColor: 'var(--neutral-200)' }}
+          >
+            {capabilities.map((cap, i) => {
+              const Icon = cap.icon
+              return (
+                <motion.div
+                  key={cap.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.4 + i * 0.07, duration: 0.5 }}
+                  className="group flex flex-col gap-4 p-7 transition-colors duration-300 border-b border-r"
+                  style={{
+                    borderColor: 'var(--neutral-200)',
+                    background: '#FFFFFF',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'var(--navy)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = '#FFFFFF'
+                  }}
+                >
+                  <div className="flex items-center justify-between">
+                    <Icon
+                      size={18}
+                      className="transition-colors duration-300 group-hover:text-[var(--cyan)]"
+                      style={{ color: 'var(--neutral-400)' }}
+                      aria-hidden="true"
+                    />
+                    <span
+                      className="text-[10px] font-bold tracking-[0.15em] transition-colors duration-300 group-hover:text-[var(--cyan)]"
+                      style={{ color: 'var(--neutral-300)' }}
+                    >
+                      {cap.num}
+                    </span>
+                  </div>
+                  <h3
+                    className="text-[15px] font-bold leading-snug transition-colors duration-300 group-hover:text-white"
+                    style={{ color: 'var(--navy)' }}
+                  >
+                    {cap.title}
+                  </h3>
+                  <p
+                    className="text-[13px] leading-relaxed transition-colors duration-300 group-hover:text-[rgba(255,255,255,0.6)]"
+                    style={{ color: 'var(--neutral-500)' }}
+                  >
+                    {cap.desc}
+                  </p>
+                </motion.div>
+              )
+            })}
+          </div>
+        </div>
       </div>
     </section>
   )

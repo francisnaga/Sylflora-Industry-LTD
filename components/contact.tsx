@@ -42,15 +42,14 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="py-28 md:py-36 lg:py-44 relative overflow-hidden"
-      style={{ background: '#0F172A' }}
+              className="py-24 md:py-32 relative overflow-hidden"
+      style={{ background: 'var(--dark-bg)' }}
     >
-      {/* Ambient gradient */}
-      <div 
-        className="absolute top-0 left-1/2 w-[800px] h-[600px] rounded-full pointer-events-none -translate-x-1/2"
-        style={{ 
-          background: 'radial-gradient(ellipse, rgba(45,138,90,0.06) 0%, transparent 60%)',
-        }}
+      {/* Top accent */}
+      <div
+        className="absolute top-0 left-0 right-0 h-0.5"
+        style={{ background: 'linear-gradient(to right, transparent, var(--cyan), transparent)' }}
+        aria-hidden="true"
       />
       
       <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-16 relative z-10">
@@ -64,20 +63,17 @@ export default function Contact() {
             className="flex flex-col gap-12"
           >
             <div>
-              <p
-                className="text-[11px] font-semibold tracking-[0.2em] uppercase mb-6 flex items-center gap-4"
-                style={{ color: '#4FA870' }}
-              >
-                <span className="h-px w-10" style={{ background: '#4FA870' }} />
+              <p className="tag-cyan mb-5">
+                <span className="rule-cyan" aria-hidden="true" />
                 Get In Touch
               </p>
               <h2
-                className="text-[2.75rem] md:text-[3.25rem] font-black leading-[1.02] tracking-[-0.03em] text-balance"
+                className="text-[2.5rem] md:text-[3rem] font-black leading-[1.0] tracking-[-0.025em] text-balance"
                 style={{ fontFamily: 'var(--font-display)', color: '#FFFFFF' }}
               >
-                Let&apos;s build something
+                Contact Our
                 <br />
-                <span style={{ color: '#4FA870' }}>together.</span>
+                <span style={{ color: 'var(--cyan)' }}>Sales Team</span>
               </h2>
               <p
                 className="mt-6 text-[17px] leading-[1.75]"

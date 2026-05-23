@@ -2,15 +2,21 @@
 
 import { useRef, useEffect } from 'react'
 import { motion, useInView, animate } from 'framer-motion'
+import { CheckCircle2 } from 'lucide-react'
+
+// Award image
+const AWARD_IMG = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5654-sMRNMsOVFdN6ZZRMlbJUoccXvysix2.jpeg'
+// Market stall / distribution photo
+const MARKET_IMG = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5651-MXOPw2ZccvT7Lf879XxCuj1IIs8bh1.jpeg'
 
 function Counter({ to, suffix = '' }: { to: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: true, margin: '-60px' })
 
   useEffect(() => {
     if (!inView || !ref.current) return
     const controls = animate(0, to, {
-      duration: 2.5,
+      duration: 2,
       ease: [0.22, 1, 0.36, 1],
       onUpdate(v) {
         if (ref.current) ref.current.textContent = Math.round(v) + suffix
@@ -19,42 +25,21 @@ function Counter({ to, suffix = '' }: { to: number; suffix?: string }) {
     return () => controls.stop()
   }, [inView, to, suffix])
 
-  return (
-    <span ref={ref} className="tabular-nums">
-      0{suffix}
-    </span>
-  )
+  return <span ref={ref} className="tabular-nums">0{suffix}</span>
 }
 
 const stats = [
-  {
-    value: 10,
-    suffix: '+',
-    label: 'Years of Excellence',
-    desc: 'Manufacturing premium hygiene products since 2014',
-    featured: true,
-  },
-  {
-    value: 36,
-    suffix: '',
-    label: 'States Covered',
-    desc: 'Nationwide distribution network',
-    featured: false,
-  },
-  {
-    value: 4,
-    suffix: '',
-    label: 'Countries',
-    desc: 'West African market presence',
-    featured: false,
-  },
-  {
-    value: 30,
-    suffix: '+',
-    label: 'Product Lines',
-    desc: '100% virgin wood pulp quality',
-    featured: false,
-  },
+  { value: 10, suffix: '+', label: 'Years Manufacturing', sub: 'Est. 2014, Ogidi Anambra' },
+  { value: 36, suffix: '', label: 'States Covered', sub: 'All 36 states + FCT' },
+  { value: 4, suffix: '', label: 'West African Countries', sub: 'Nigeria, Ghana, Cameroon, Togo' },
+  { value: 30, suffix: '+', label: 'Product Lines', sub: '100% virgin wood pulp' },
+]
+
+const credentials = [
+  'ONICCIMA Award of Excellence 2024',
+  'Best Tissue & Serviette Producer of the Year',
+  'ISO-Standard Manufacturing Facility',
+  'Nationwide & West African Distribution Network',
 ]
 
 export default function TrustStats() {
@@ -65,135 +50,144 @@ export default function TrustStats() {
     <section
       id="trust-stats"
       ref={ref}
-      className="py-24 md:py-32 lg:py-40 relative overflow-hidden"
-      style={{ background: '#FFFFFF' }}
+      className="py-0 relative overflow-hidden"
+      style={{ background: 'var(--navy)' }}
     >
-      {/* Subtle background accent */}
-      <div 
-        className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{ 
-          background: 'radial-gradient(circle, rgba(45,138,90,0.03) 0%, transparent 70%)',
-          transform: 'translate(30%, -30%)'
-        }}
+      {/* Top border accent */}
+      <div
+        className="absolute top-0 left-0 right-0 h-0.5"
+        style={{ background: 'linear-gradient(to right, transparent, var(--cyan), transparent)' }}
+        aria-hidden="true"
       />
-      
-      <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-16 relative z-10">
 
-        {/* Eyebrow with refined styling */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="flex items-center gap-5 mb-20"
+      <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-16">
+        {/* Stats row */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0"
+          style={{ borderColor: 'rgba(255,255,255,0.07)' }}
         >
-          <span
-            className="h-px w-16"
-            style={{ background: 'linear-gradient(to right, #2D8A5A, transparent)' }}
-          />
-          <span
-            className="text-[11px] font-semibold tracking-[0.2em] uppercase"
-            style={{ color: '#2D8A5A' }}
-          >
-            Our Reach
-          </span>
-        </motion.div>
-
-        {/* Asymmetric grid - featured stat on left, others stacked on right */}
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
-          {/* Featured stat - takes dominant space */}
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5"
-          >
-            <div className="flex flex-col gap-4">
-              {/* Giant number */}
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col gap-1.5 px-6 md:px-8 py-10 md:py-12 group"
+              style={{ borderColor: 'rgba(255,255,255,0.07)' }}
+            >
               <div
-                className="text-[6rem] md:text-[8rem] lg:text-[10rem] font-black leading-[0.85] tracking-[-0.04em]"
-                style={{ 
-                  fontFamily: 'var(--font-display)', 
-                  color: '#0F172A',
-                }}
+                className="text-[3rem] md:text-[3.75rem] font-black leading-none tracking-[-0.03em]"
+                style={{ fontFamily: 'var(--font-display)', color: '#FFFFFF' }}
               >
-                <Counter to={stats[0].value} suffix={stats[0].suffix} />
+                <Counter to={stat.value} suffix={stat.suffix} />
               </div>
-              {/* Label */}
-              <h3
-                className="text-[1.5rem] md:text-[1.75rem] font-bold leading-tight tracking-[-0.02em]"
-                style={{ color: '#0F172A' }}
+              <p
+                className="text-[13px] md:text-[14px] font-bold"
+                style={{ color: 'var(--cyan)' }}
               >
-                {stats[0].label}
-              </h3>
-              {/* Description */}
-              <p className="text-[15px] leading-relaxed max-w-[280px]" style={{ color: '#6B7280' }}>
-                {stats[0].desc}
+                {stat.label}
               </p>
-              {/* Accent line */}
-              <div
-                className="mt-4 h-1 w-16 rounded-full"
-                style={{ background: 'linear-gradient(to right, #2D8A5A, #4FA870)' }}
-              />
+              <p
+                className="text-[11px] leading-snug"
+                style={{ color: 'rgba(255,255,255,0.35)' }}
+              >
+                {stat.sub}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Award + credibility row */}
+        <div
+          className="grid md:grid-cols-2 gap-0 divide-y md:divide-y-0 md:divide-x"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.07)', borderColor: 'rgba(255,255,255,0.07)' }}
+        >
+          {/* Award image panel */}
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.25, duration: 0.7 }}
+            className="relative overflow-hidden"
+            style={{ height: '280px' }}
+          >
+            <img
+              src={AWARD_IMG}
+              alt="ONICCIMA Award of Excellence — SylFlora Industries Ltd, Best Tissue & Serviette Producer 2024"
+              className="w-full h-full object-cover object-top"
+            />
+            <div
+              className="absolute inset-0 flex items-end p-7"
+              style={{
+                background: 'linear-gradient(to top, rgba(8,13,24,0.92) 0%, rgba(8,13,24,0.4) 45%, transparent 100%)',
+              }}
+            >
+              <div>
+                <p
+                  className="text-[10px] font-bold tracking-[0.15em] uppercase mb-2"
+                  style={{ color: 'var(--cyan)' }}
+                >
+                  Recognition
+                </p>
+                <p
+                  className="text-[16px] md:text-[18px] font-black leading-tight text-white"
+                  style={{ fontFamily: 'var(--font-display)' }}
+                >
+                  Best Tissue & Serviette
+                  <br />Producer of the Year &mdash; 2024
+                </p>
+              </div>
             </div>
           </motion.div>
 
-          {/* Other stats - grid on the right */}
-          <div className="lg:col-span-7">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8 lg:gap-10">
-              {stats.slice(1).map((stat, i) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 28 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ 
-                    delay: 0.15 + i * 0.1, 
-                    duration: 0.8, 
-                    ease: [0.22, 1, 0.36, 1] 
-                  }}
-                  className="flex flex-col gap-3 p-6 rounded-2xl transition-all duration-500"
-                  style={{
-                    background: 'rgba(249,249,248,0.6)',
-                    border: '1px solid rgba(234,230,224,0.5)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = '#FFFFFF'
-                    e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.06)'
-                    e.currentTarget.style.transform = 'translateY(-2px)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'rgba(249,249,248,0.6)'
-                    e.currentTarget.style.boxShadow = 'none'
-                    e.currentTarget.style.transform = 'translateY(0)'
-                  }}
-                >
-                  {/* Number */}
-                  <div
-                    className="text-[3rem] md:text-[3.5rem] font-black leading-none tracking-[-0.03em]"
-                    style={{ fontFamily: 'var(--font-display)', color: '#0F172A' }}
-                  >
-                    <Counter to={stat.value} suffix={stat.suffix} />
-                  </div>
-                  {/* Label */}
-                  <p
-                    className="text-[14px] font-bold leading-snug"
-                    style={{ color: '#0F172A' }}
-                  >
-                    {stat.label}
-                  </p>
-                  {/* Description */}
-                  <p className="text-[12px] leading-relaxed" style={{ color: '#9CA3AF' }}>
-                    {stat.desc}
-                  </p>
-                  {/* Subtle accent */}
-                  <div
-                    className="mt-1 h-0.5 w-8 rounded-full"
-                    style={{ background: '#2D8A5A' }}
-                  />
-                </motion.div>
-              ))}
+          {/* Credentials list */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.35, duration: 0.7 }}
+            className="flex flex-col justify-center px-7 md:px-10 py-10 gap-5"
+          >
+            <div className="mb-2">
+              <p className="tag-cyan mb-3">
+                <span className="rule-cyan" aria-hidden="true" />
+                Operational Credibility
+              </p>
+              <h2
+                className="text-[1.5rem] md:text-[1.75rem] font-black leading-tight"
+                style={{ fontFamily: 'var(--font-display)', color: '#FFFFFF' }}
+              >
+                Built on Proven Performance
+              </h2>
             </div>
-          </div>
+            <ul className="flex flex-col gap-3">
+              {credentials.map((c, i) => (
+                <motion.li
+                  key={c}
+                  initial={{ opacity: 0, x: 16 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.4 + i * 0.07, duration: 0.5 }}
+                  className="flex items-start gap-3 text-[13px] leading-snug"
+                  style={{ color: 'rgba(255,255,255,0.7)' }}
+                >
+                  <CheckCircle2
+                    size={16}
+                    className="shrink-0 mt-0.5"
+                    style={{ color: 'var(--cyan)' }}
+                    aria-hidden="true"
+                  />
+                  {c}
+                </motion.li>
+              ))}
+            </ul>
+
+            {/* Distribution photo thumbnail */}
+            <div className="mt-2 overflow-hidden" style={{ height: '80px' }}>
+              <img
+                src={MARKET_IMG}
+                alt="SylFlora products at a large distribution market"
+                className="w-full h-full object-cover"
+                style={{ objectPosition: 'center 40%' }}
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -3,7 +3,7 @@
 import { Phone, Mail, Globe, MapPin } from 'lucide-react'
 
 const LOGO_URL =
-  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f7da5756-3a32-4e89-baa1-7723073e12b0.jpeg'
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Premium%20modern%20logo%20redesign%2C%20circular%20badge%20with%20perfect%20symmetry%2C%20left%20side%20vibrant%20blue%20water%20droplet%2C%20right%20side%20bright%20green%20leaf%20flame%2C%20intertwined%20S-curve%20design%20in%20white%20creating%20yin-yang%20balance%2C%20crisp%20vector-style%20graphics%2C%20subtle%20gradient%20-Re0t8mbbed9Bcd0p4SpKwVbdzani7J.jpeg'
 
 const navGroups = [
   {
@@ -39,7 +39,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer style={{ background: '#080B10', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+    <footer style={{ background: 'var(--navy)', borderTop: '2px solid var(--cyan)' }}>
       <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-16 py-20 md:py-24">
 
         {/* Top section */}
@@ -66,7 +66,7 @@ export default function Footer() {
                 >
                   SylFlora
                 </p>
-                <p className="text-[10px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#4B5563' }}>
+                <p className="text-[10px] font-semibold tracking-[0.12em] uppercase" style={{ color: 'var(--cyan)' }}>
                   Industries Ltd
                 </p>
               </div>
@@ -118,7 +118,7 @@ export default function Footer() {
             <div key={group.title} className="flex flex-col gap-6">
               <p
                 className="text-[11px] font-bold tracking-[0.15em] uppercase"
-                style={{ color: '#4FA870' }}
+                style={{ color: 'var(--cyan)' }}
               >
                 {group.title}
               </p>
@@ -151,9 +151,9 @@ export default function Footer() {
           <div className="flex items-start gap-4">
             <div 
               className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"
-              style={{ background: 'rgba(79,168,112,0.1)' }}
+              style={{ background: 'rgba(0,168,198,0.1)' }}
             >
-              <MapPin size={14} style={{ color: '#4FA870' }} />
+              <MapPin size={14} style={{ color: 'var(--cyan)' }} />
             </div>
             <div>
               <p className="text-[10px] font-bold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#374151' }}>Factory</p>
@@ -189,7 +189,7 @@ export default function Footer() {
           </p>
           <p className="text-[12px]" style={{ color: '#374151' }}>
             Exclusively marketed in West Africa by{' '}
-            <span className="font-semibold" style={{ color: '#4FA870' }}>
+            <span className="font-semibold"             style={{ color: 'var(--cyan)' }}>
               Doda Troupe Int&apos;l Ltd
             </span>
           </p>
