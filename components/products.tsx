@@ -14,6 +14,38 @@ const categories: Category[] = [
   'Uncle Bruno',
 ]
 
+// Product category highlights using real uploaded images
+const ecosystemCategories = [
+  {
+    name: 'Toilet Tissue',
+    desc: 'Premium 300-sheet rolls in multiple plies. Soft, strong, and hygienic.',
+    img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5653-e0XGqCAhykuvSTDYNvLPIDRsZvcLxl.png',
+    count: '8 SKUs',
+    color: 'var(--cyan)',
+  },
+  {
+    name: 'Serviettes & Napkins',
+    desc: 'Table napkins and serviettes for hospitality and everyday use.',
+    img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5642-v5dcrdhMk5R9uc4i5u8CUFWSjmjECt.jpeg',
+    count: '5 SKUs',
+    color: '#22A063',
+  },
+  {
+    name: 'Facial Tissue',
+    desc: 'Soft facial tissues in pocket packs and box formats.',
+    img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5636-c0KeKWmhrFC4iQxZZiiS5UlGWB4hLN.jpeg',
+    count: '6 SKUs',
+    color: 'var(--cyan)',
+  },
+  {
+    name: 'Baby Diapers',
+    desc: 'SylFlora premium diapers — ultra-soft, high absorbency, baby-safe.',
+    img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5648-5AoxXWJXgP7bPop7zbOIYOHmMCTSwi.png',
+    count: '4 sizes',
+    color: '#22A063',
+  },
+]
+
 interface Product {
   name: string
   category: Exclude<Category, 'All'>
@@ -75,15 +107,15 @@ const products: Product[] = [
     src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/646dfaca-2ede-4191-9b9b-3e843a17adf1.jpeg',
   },
   {
-    name: 'Large (Pink)',
+    name: 'Size 4 Maxi',
     category: 'Diapers',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/b50b37d0-3a78-4d0d-9531-eed7687cbc6a.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5648-5AoxXWJXgP7bPop7zbOIYOHmMCTSwi.png',
     featured: true,
   },
   {
-    name: 'Medium (Teal)',
+    name: 'Size 2 Mini',
     category: 'Diapers',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/d2ca6aeb-6bb6-4646-a0e0-23ffbef08caa.jpeg',
+    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5647-aW5DHX4eYig8e6Y9F6M9lPSHD1zKfp.png',
   },
   {
     name: 'Purple',
@@ -113,59 +145,123 @@ export default function Products() {
   const inView = useInView(ref, { once: true, margin: '-40px' })
 
   const filtered = active === 'All' ? products : products.filter((p) => p.category === active)
-  
-  // Separate featured and regular products for "All" view
-  const featuredProducts = filtered.filter(p => p.featured)
-  const regularProducts = filtered.filter(p => !p.featured)
+  const featuredProducts = filtered.filter((p) => p.featured)
+  const regularProducts = filtered.filter((p) => !p.featured)
 
   return (
     <section
       id="products"
       ref={ref}
-      className="py-28 md:py-36 lg:py-44 relative overflow-hidden"
-      style={{ background: '#F9F9F8' }}
+      className="py-24 md:py-32 relative overflow-hidden"
+      style={{ background: '#FFFFFF' }}
     >
-      {/* Subtle ambient gradient */}
-      <div 
-        className="absolute top-1/2 left-1/2 w-[800px] h-[800px] rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2"
-        style={{ 
-          background: 'radial-gradient(circle, rgba(45,138,90,0.02) 0%, transparent 60%)',
-        }}
-      />
-      
-      <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-16 relative z-10">
-        {/* Header — more editorial */}
+      <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-16">
+
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-16"
+        >
+          <p className="tag-cyan mb-5">
+            <span className="rule-cyan" aria-hidden="true" />
+            Product Ecosystem
+          </p>
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            <h2
+              className="text-[2.5rem] md:text-[3rem] xl:text-[3.5rem] font-black leading-[1.0] tracking-[-0.025em] text-balance"
+              style={{ fontFamily: 'var(--font-display)', color: 'var(--navy)' }}
+            >
+              Our Product Range
+            </h2>
+            <p
+              className="text-[15px] leading-relaxed max-w-md"
+              style={{ color: 'var(--neutral-500)' }}
+            >
+              100% virgin wood pulp. Manufactured to strict hygiene standards. Available to
+              distributors, wholesalers, and retailers nationwide.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Category feature cards — 4 main categories */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-20"
+          transition={{ delay: 0.1, duration: 0.7 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14"
         >
-          <p
-            className="text-[11px] font-semibold tracking-[0.2em] uppercase mb-5 flex items-center justify-center gap-4"
-            style={{ color: '#2D8A5A' }}
-          >
-            <span className="h-px w-10" style={{ background: '#2D8A5A' }} />
-            Premium Hygiene Products
-            <span className="h-px w-10" style={{ background: '#2D8A5A' }} />
-          </p>
-          <h2
-            className="text-[2.75rem] md:text-[3.5rem] lg:text-[4rem] font-black leading-[1.02] tracking-[-0.03em] text-balance"
-            style={{ fontFamily: 'var(--font-display)', color: '#1A1410' }}
-          >
-            Our Products
-          </h2>
-          <p className="mt-6 text-[17px] max-w-2xl mx-auto leading-relaxed" style={{ color: '#6B6560' }}>
-            Crafted with pure 100% virgin wood pulp. Soft, strong, reliable. Products you can trust for every moment.
-          </p>
+          {ecosystemCategories.map((cat, i) => (
+            <motion.div
+              key={cat.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.15 + i * 0.07, duration: 0.6 }}
+              className="group cursor-pointer overflow-hidden img-reveal"
+              style={{
+                border: '1px solid var(--neutral-200)',
+              }}
+              onClick={() => setActive(cat.name.includes('Serviette') ? 'Handkerchiefs' : cat.name as Category)}
+            >
+              <div className="overflow-hidden" style={{ height: '160px' }}>
+                <img
+                  src={cat.img}
+                  alt={cat.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <div
+                className="p-5 transition-colors duration-300"
+                style={{ background: '#FFFFFF' }}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <p
+                    className="text-[10px] font-bold tracking-[0.15em] uppercase"
+                    style={{ color: cat.color }}
+                  >
+                    {cat.count}
+                  </p>
+                  <span
+                    className="text-[10px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity"
+                    style={{ color: 'var(--cyan)' }}
+                  >
+                    View &rarr;
+                  </span>
+                </div>
+                <h3
+                  className="text-[15px] font-bold leading-snug"
+                  style={{ color: 'var(--navy)' }}
+                >
+                  {cat.name}
+                </h3>
+                <p
+                  className="text-[12px] mt-1.5 leading-snug"
+                  style={{ color: 'var(--neutral-500)' }}
+                >
+                  {cat.desc}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
 
-        {/* Category filter pills — refined */}
+        {/* Divider */}
+        <div
+          className="h-px mb-14"
+          style={{ background: 'var(--neutral-200)' }}
+          aria-hidden="true"
+        />
+
+        {/* Filter pills */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.15, duration: 0.6 }}
-          className="flex justify-center gap-3 flex-wrap mb-16"
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="flex items-center gap-2 flex-wrap mb-12"
+          role="group"
+          aria-label="Filter products by category"
         >
           {categories.map((cat) => {
             const isActive = active === cat
@@ -173,13 +269,13 @@ export default function Products() {
               <button
                 key={cat}
                 onClick={() => setActive(cat)}
-                className="px-6 py-3 text-[12px] font-semibold rounded-full transition-all duration-400 uppercase tracking-[0.08em] min-h-[48px]"
+                className="px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.1em] transition-all duration-300"
                 style={{
-                  background: isActive ? '#0F172A' : '#FFFFFF',
-                  color: isActive ? '#FFFFFF' : '#4B5563',
-                  border: isActive ? '1px solid #0F172A' : '1px solid #E5E7EB',
-                  boxShadow: isActive ? '0 4px 12px rgba(15,23,42,0.15)' : 'none',
+                  background: isActive ? 'var(--navy)' : 'transparent',
+                  color: isActive ? '#FFFFFF' : 'var(--neutral-500)',
+                  border: isActive ? '1px solid var(--navy)' : '1px solid var(--neutral-300)',
                 }}
+                aria-pressed={isActive}
               >
                 {cat}
               </button>
@@ -187,119 +283,96 @@ export default function Products() {
           })}
         </motion.div>
 
-        {/* Product grid with hierarchy */}
+        {/* Product grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.3 }}
           >
-            {/* Featured products row (when showing All) */}
+            {/* Featured row */}
             {active === 'All' && featuredProducts.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 {featuredProducts.map((product, i) => (
                   <motion.article
-                    key={`featured-${product.name}-${product.category}`}
+                    key={`featured-${product.name}`}
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                    className="group"
+                    transition={{ delay: i * 0.06, duration: 0.5 }}
+                    className="group cursor-pointer"
                   >
                     <div
-                      className="relative overflow-hidden rounded-3xl aspect-[4/5] transition-all duration-500"
-                      style={{
-                        background: '#FFFFFF',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.boxShadow = '0 16px 48px rgba(0,0,0,0.1)'
-                        e.currentTarget.style.transform = 'translateY(-4px)'
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)'
-                        e.currentTarget.style.transform = 'translateY(0)'
-                      }}
+                      className="relative overflow-hidden aspect-[4/5] img-reveal"
+                      style={{ background: 'var(--neutral-100)' }}
                     >
                       <img
                         src={product.src}
                         alt={product.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        className="w-full h-full object-cover"
                         loading="lazy"
                       />
-                      {/* Featured badge */}
-                      <div 
-                        className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase"
-                        style={{ 
-                          background: 'rgba(255,255,255,0.95)', 
-                          backdropFilter: 'blur(8px)',
-                          color: '#2D8A5A'
-                        }}
+                      <div
+                        className="absolute top-3 left-3 px-2.5 py-1 text-[9px] font-bold tracking-[0.12em] uppercase"
+                        style={{ background: 'var(--cyan)', color: '#FFFFFF' }}
                       >
                         Featured
                       </div>
                     </div>
-                    <div className="mt-5">
-                      <h3
-                        className="text-[17px] font-bold leading-tight"
-                        style={{ color: '#0F172A' }}
+                    <div
+                      className="px-1 pt-4 pb-2 flex items-center justify-between"
+                      style={{ borderBottom: '1px solid var(--neutral-200)' }}
+                    >
+                      <div>
+                        <h3 className="text-[15px] font-bold" style={{ color: 'var(--navy)' }}>
+                          {product.name}
+                        </h3>
+                        <p className="text-[11px] mt-0.5" style={{ color: 'var(--neutral-400)' }}>
+                          {product.category}
+                        </p>
+                      </div>
+                      <span
+                        className="text-[10px] font-bold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity"
+                        style={{ color: 'var(--cyan)' }}
                       >
-                        {product.name}
-                      </h3>
-                      <p className="text-[13px] mt-1.5" style={{ color: '#9CA3AF' }}>
-                        {product.category}
-                      </p>
+                        Inquire
+                      </span>
                     </div>
                   </motion.article>
                 ))}
               </div>
             )}
 
-            {/* Regular products grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
+            {/* Regular grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {(active === 'All' ? regularProducts : filtered).map((product, i) => (
                 <motion.article
                   key={`${product.name}-${product.category}`}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    delay: (active === 'All' ? 0.2 : 0) + i * 0.03, 
-                    duration: 0.5, 
-                    ease: [0.22, 1, 0.36, 1] 
+                  transition={{
+                    delay: (active === 'All' ? 0.15 : 0) + i * 0.03,
+                    duration: 0.45,
                   }}
-                  className="group"
+                  className="group cursor-pointer"
                 >
                   <div
-                    className="relative overflow-hidden rounded-2xl aspect-square transition-all duration-500"
-                    style={{
-                      background: '#FFFFFF',
-                      boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,0.08)'
-                      e.currentTarget.style.transform = 'translateY(-3px)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.04)'
-                      e.currentTarget.style.transform = 'translateY(0)'
-                    }}
+                    className="relative overflow-hidden aspect-square img-reveal"
+                    style={{ background: 'var(--neutral-100)' }}
                   >
                     <img
                       src={product.src}
                       alt={product.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover"
                       loading="lazy"
                     />
                   </div>
-                  <div className="mt-4">
-                    <h3
-                      className="text-[15px] font-bold leading-tight"
-                      style={{ color: '#0F172A' }}
-                    >
+                  <div className="pt-3 pb-2">
+                    <h3 className="text-[13px] font-bold" style={{ color: 'var(--navy)' }}>
                       {product.name}
                     </h3>
-                    <p className="text-[12px] mt-1" style={{ color: '#9CA3AF' }}>
+                    <p className="text-[11px] mt-0.5" style={{ color: 'var(--neutral-400)' }}>
                       {product.category}
                     </p>
                   </div>
@@ -308,6 +381,44 @@ export default function Products() {
             </div>
           </motion.div>
         </AnimatePresence>
+
+        {/* CTA strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-5 p-7 md:p-8"
+          style={{
+            background: 'var(--navy)',
+          }}
+        >
+          <div>
+            <p
+              className="text-[11px] font-bold tracking-[0.15em] uppercase mb-1"
+              style={{ color: 'var(--cyan)' }}
+            >
+              Wholesale & Distribution
+            </p>
+            <p className="text-[17px] font-black text-white" style={{ fontFamily: 'var(--font-display)' }}>
+              Looking to stock SylFlora products?
+            </p>
+          </div>
+          <button
+            onClick={() => document.getElementById('distributor')?.scrollIntoView({ behavior: 'smooth' })}
+            className="shrink-0 px-8 py-4 text-[12px] font-bold uppercase tracking-[0.1em] transition-all duration-300 whitespace-nowrap"
+            style={{ background: 'var(--cyan)', color: '#FFFFFF' }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--cyan-light)'
+              e.currentTarget.style.transform = 'translateY(-1px)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'var(--cyan)'
+              e.currentTarget.style.transform = 'translateY(0)'
+            }}
+          >
+            Contact Our Sales Team &rarr;
+          </button>
+        </motion.div>
       </div>
     </section>
   )

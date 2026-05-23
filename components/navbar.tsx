@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Phone } from 'lucide-react'
 
 const navLinks = [
   { label: 'Home', href: 'home' },
@@ -13,14 +13,14 @@ const navLinks = [
 ]
 
 const LOGO_URL =
-  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/f7da5756-3a32-4e89-baa1-7723073e12b0.jpeg'
+  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Premium%20modern%20logo%20redesign%2C%20circular%20badge%20with%20perfect%20symmetry%2C%20left%20side%20vibrant%20blue%20water%20droplet%2C%20right%20side%20bright%20green%20leaf%20flame%2C%20intertwined%20S-curve%20design%20in%20white%20creating%20yin-yang%20balance%2C%20crisp%20vector-style%20graphics%2C%20subtle%20gradient%20-Re0t8mbbed9Bcd0p4SpKwVbdzani7J.jpeg'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 48)
+    const handleScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -33,35 +33,28 @@ export default function Navbar() {
   return (
     <>
       <motion.header
-        initial={{ y: -72, opacity: 0 }}
+        initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-400"
         style={{
-          background: scrolled ? 'rgba(255,252,249,0.85)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(20px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(234,230,224,0.6)' : '1px solid transparent',
+          background: scrolled ? 'rgba(8,13,24,0.96)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(16px)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
         }}
       >
         <div className="max-w-7xl mx-auto px-5 md:px-8 xl:px-12">
-          <div className="flex items-center justify-between h-16 md:h-20">
+          <div className="flex items-center justify-between h-16 md:h-[72px]">
 
             {/* Logo */}
             <button
               onClick={() => handleLink('home')}
-              className="flex items-center gap-2 md:gap-4 group"
-              aria-label="SylFlora Industries LTD — go to homepage"
+              className="flex items-center gap-3 group shrink-0"
+              aria-label="SylFlora Industries Ltd — go to homepage"
             >
               <div
-                className="relative w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden transition-all duration-300 flex-shrink-0"
-                style={{ boxShadow: '0 0 0 2px transparent' }}
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLDivElement).style.boxShadow = '0 0 0 2px #2D8A5A')
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLDivElement).style.boxShadow = '0 0 0 2px transparent')
-                }
+                className="relative w-10 h-10 md:w-11 md:h-11 rounded-full overflow-hidden shrink-0 ring-1 ring-transparent group-hover:ring-[var(--cyan)] transition-all duration-300"
               >
                 <img
                   src={LOGO_URL}
@@ -69,66 +62,83 @@ export default function Navbar() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <span
-                className="text-[15px] md:text-[17px] font-black"
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  color: '#1A1410',
-                  letterSpacing: '-0.02em',
-                }}
-              >
-                SylFlora{' '}
-                <span style={{ color: '#2D8A5A' }}>Industry LTD</span>
-              </span>
+              <div className="flex flex-col leading-none">
+                <span
+                  className="text-[15px] md:text-[16px] font-black tracking-[-0.01em]"
+                  style={{ fontFamily: 'var(--font-display)', color: '#FFFFFF' }}
+                >
+                  SylFlora
+                </span>
+                <span
+                  className="text-[9px] font-bold tracking-[0.15em] uppercase"
+                  style={{ color: 'var(--cyan)' }}
+                >
+                  Industries Ltd
+                </span>
+              </div>
             </button>
 
             {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-8" aria-label="Primary navigation">
+            <nav className="hidden md:flex items-center gap-7" aria-label="Primary navigation">
               {navLinks.map((link) => (
                 <button
                   key={link.label}
                   onClick={() => handleLink(link.href)}
-                  className="relative text-[13px] font-semibold uppercase tracking-widest transition-colors duration-200 group"
-              style={{ color: '#6B6560' }}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLButtonElement).style.color = '#1A1410')
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLButtonElement).style.color = '#6B6560')
-              }
-            >
-              {link.label}
-              <span
-                className="absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300 rounded-full"
-                style={{ background: '#2D8A5A' }}
+                  className="relative text-[11px] font-bold uppercase tracking-[0.14em] transition-colors duration-200 group"
+                  style={{ color: 'rgba(255,255,255,0.55)' }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.color = '#FFFFFF'
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLButtonElement).style.color = 'rgba(255,255,255,0.55)'
+                  }}
+                >
+                  {link.label}
+                  <span
+                    className="absolute -bottom-0.5 left-0 w-0 h-px group-hover:w-full transition-all duration-300"
+                    style={{ background: 'var(--cyan)' }}
                   />
                 </button>
               ))}
             </nav>
 
-            {/* Desktop CTA */}
-            <button
-              onClick={() => handleLink('distributor')}
-              className="hidden md:inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full text-[12px] font-bold uppercase tracking-wide transition-all duration-300 min-h-[44px]"
-              style={{
-                background: '#1A1410',
-                color: '#FFFCF9',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#2D8A5A'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = '#1A1410'
-              }}
-            >
-              Become Distributor
-            </button>
+            {/* Desktop CTA + phone */}
+            <div className="hidden md:flex items-center gap-4">
+              <a
+                href="tel:+2348035429082"
+                className="flex items-center gap-2 text-[11px] font-semibold tracking-wide transition-colors"
+                style={{ color: 'rgba(255,255,255,0.4)' }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--cyan)')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}
+              >
+                <Phone size={12} />
+                +234 803 542 9082
+              </a>
+              <button
+                onClick={() => handleLink('distributor')}
+                className="inline-flex items-center gap-1.5 px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.1em] transition-all duration-300"
+                style={{
+                  background: 'var(--cyan)',
+                  color: '#FFFFFF',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'var(--cyan-light)'
+                  e.currentTarget.style.transform = 'translateY(-1px)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'var(--cyan)'
+                  e.currentTarget.style.transform = 'translateY(0)'
+                }}
+              >
+                Become Distributor
+              </button>
+            </div>
 
             {/* Mobile hamburger */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden w-11 h-11 flex items-center justify-center rounded-full transition-colors"
-              style={{ color: '#0F172A' }}
+              className="md:hidden w-10 h-10 flex items-center justify-center transition-colors"
+              style={{ color: '#FFFFFF' }}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
             >
@@ -141,44 +151,73 @@ export default function Navbar() {
       {/* Mobile full-screen menu */}
       <AnimatePresence>
         {menuOpen && (
-            <motion.div
-            initial={{ opacity: 0, y: -12 }}
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-40 flex flex-col pt-24 px-6 pb-10"
-            style={{ background: '#FFFCF9' }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-40 flex flex-col pt-20 px-6 pb-8"
+            style={{ background: 'var(--navy)' }}
           >
-            <nav className="flex flex-col flex-1 justify-center gap-1" aria-label="Mobile navigation">
+            {/* Thin cyan top line */}
+            <div
+              className="absolute top-0 left-0 right-0 h-0.5"
+              style={{ background: 'var(--cyan)' }}
+              aria-hidden="true"
+            />
+
+            <nav className="flex flex-col flex-1 justify-center gap-0" aria-label="Mobile navigation">
               {navLinks.map((link, i) => (
                 <motion.button
                   key={link.label}
-                  initial={{ opacity: 0, x: -16 }}
+                  initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06, duration: 0.4 }}
+                  transition={{ delay: i * 0.05, duration: 0.35 }}
                   onClick={() => handleLink(link.href)}
-                  className="text-left py-4 text-[28px] font-black tracking-tight border-b"
+                  className="text-left py-5 text-[2rem] font-black tracking-tight border-b flex items-center justify-between group"
                   style={{
                     fontFamily: 'var(--font-display)',
-                    color: '#1A1410',
-                    borderColor: '#EAE6E0',
+                    color: '#FFFFFF',
+                    borderColor: 'rgba(255,255,255,0.06)',
                   }}
                 >
-                  {link.label}
+                  <span className="group-hover:text-[var(--cyan)] transition-colors">{link.label}</span>
+                  <span
+                    className="text-[1rem] opacity-0 group-hover:opacity-100 transition-all"
+                    style={{ color: 'var(--cyan)' }}
+                    aria-hidden="true"
+                  >
+                    &rarr;
+                  </span>
                 </motion.button>
               ))}
             </nav>
 
-            <motion.button
+            <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              onClick={() => handleLink('distributor')}
-              className="w-full py-5 rounded-full text-[14px] font-bold uppercase tracking-wide mt-6"
-              style={{ background: '#1A1410', color: '#FFFCF9' }}
+              transition={{ delay: 0.35 }}
+              className="flex flex-col gap-3 mt-6"
             >
-              Become Distributor
-            </motion.button>
+              <a
+                href="tel:+2348035429082"
+                className="flex items-center justify-center gap-2 w-full py-4 text-[12px] font-bold uppercase tracking-[0.1em]"
+                style={{
+                  border: '1px solid rgba(255,255,255,0.12)',
+                  color: 'rgba(255,255,255,0.55)',
+                }}
+              >
+                <Phone size={13} />
+                +234 803 542 9082
+              </a>
+              <button
+                onClick={() => handleLink('distributor')}
+                className="w-full py-4 text-[13px] font-bold uppercase tracking-[0.1em]"
+                style={{ background: 'var(--cyan)', color: '#FFFFFF' }}
+              >
+                Become a Distributor
+              </button>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

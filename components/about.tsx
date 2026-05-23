@@ -13,22 +13,22 @@ const pillars = [
   {
     title: 'Nationwide Distribution',
     desc: 'Trusted across all 36 states, FCT, and 4 West African countries.',
-    accent: '#2D8A5A',
+    accent: 'var(--cyan)',
   },
   {
     title: 'Hygienic Production',
     desc: '100% virgin wood pulp. ISO-standard manufacturing practices.',
-    accent: '#2F80ED',
+    accent: 'var(--cyan)',
   },
   {
     title: 'Quality Assurance',
     desc: 'Rigorous testing at every stage of our production process.',
-    accent: '#C89968',
+    accent: 'var(--cyan)',
   },
   {
     title: 'Community Impact',
     desc: 'Empowering local employment and nurturing hygiene awareness.',
-    accent: '#2D8A5A',
+    accent: 'var(--cyan)',
   },
 ]
 
@@ -40,17 +40,9 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="py-28 md:py-36 lg:py-44 overflow-hidden relative"
-      style={{ background: '#FFFCF9' }}
-    >
-      {/* Subtle ambient gradient */}
-      <div 
-        className="absolute bottom-0 left-0 w-[600px] h-[600px] pointer-events-none"
-        style={{ 
-          background: 'radial-gradient(circle, rgba(200,153,104,0.04) 0%, transparent 70%)',
-          transform: 'translate(-30%, 30%)'
-        }}
-      />
+      className="py-24 md:py-32 overflow-hidden relative"
+      style={{ background: 'var(--off-white)' }}
+    />
       
       <div className="max-w-7xl mx-auto px-6 md:px-10 xl:px-16 relative z-10">
 
@@ -186,20 +178,17 @@ export default function About() {
             className="flex flex-col gap-8 order-1 lg:order-2"
           >
             <div>
-              <p
-                className="text-[11px] font-semibold tracking-[0.2em] uppercase mb-6 flex items-center gap-4"
-                style={{ color: '#2D8A5A' }}
-              >
-                <span className="h-px w-10" style={{ background: '#2D8A5A' }} />
+              <p className="tag-cyan mb-5">
+                <span className="rule-cyan" aria-hidden="true" />
                 Our Story
               </p>
               <h2
-                className="text-[2.75rem] md:text-[3.25rem] xl:text-[3.75rem] font-black leading-[1.02] tracking-[-0.03em] text-balance"
-                style={{ fontFamily: 'var(--font-display)', color: '#0F172A' }}
+                className="text-[2.5rem] md:text-[3rem] xl:text-[3.5rem] font-black leading-[1.0] tracking-[-0.025em] text-balance"
+                style={{ fontFamily: 'var(--font-display)', color: 'var(--navy)' }}
               >
-                Built for scale.
+                Built for Scale.
                 <br />
-                <span style={{ color: '#2D8A5A' }}>Made with care.</span>
+                <span style={{ color: 'var(--cyan)' }}>Made with Care.</span>
               </h2>
             </div>
 
@@ -214,7 +203,7 @@ export default function About() {
             {/* Quote — refined editorial styling */}
             <div
               className="border-l-[3px] pl-6 py-2 mt-2"
-              style={{ borderColor: '#2D8A5A' }}
+              style={{ borderColor: 'var(--cyan)' }}
             >
               <p className="text-[16px] italic leading-[1.7]" style={{ color: '#6B7280' }}>
                 &ldquo;To actualize the true human nature through unremitting creativity &mdash; deciphering
@@ -301,9 +290,9 @@ export default function About() {
             <div>
               <p
                 className="text-[11px] font-semibold tracking-[0.2em] uppercase mb-3 flex items-center gap-3"
-                style={{ color: '#4FA870' }}
-              >
-                <span className="w-6 h-px" style={{ background: '#4FA870' }} />
+              style={{ color: 'var(--cyan)' }}
+            >
+              <span className="w-6 h-px" style={{ background: 'var(--cyan)' }} />
                 Community Impact
               </p>
               <p
