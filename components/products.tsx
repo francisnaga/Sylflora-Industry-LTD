@@ -2,47 +2,48 @@
 
 import { useState, useRef } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 
-type Category = 'All' | 'Toilet Tissue' | 'Facial Tissue' | 'Handkerchiefs' | 'Diapers' | 'Uncle Bruno'
+type Category = 'All' | 'Toilet Tissue' | 'Facial Tissue' | 'Serviettes' | 'Diapers' | 'Handkerchiefs'
 
 const categories: Category[] = [
   'All',
   'Toilet Tissue',
   'Facial Tissue',
-  'Handkerchiefs',
+  'Serviettes',
   'Diapers',
-  'Uncle Bruno',
+  'Handkerchiefs',
 ]
 
-// Product category highlights using real uploaded images
+// Product category highlights using local images
 const ecosystemCategories = [
   {
     name: 'Toilet Tissue',
     desc: 'Premium 300-sheet rolls in multiple plies. Soft, strong, and hygienic.',
-    img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5653-e0XGqCAhykuvSTDYNvLPIDRsZvcLxl.png',
+    img: '/images/products/Royal_flora_tissue.JPG',
     count: '8 SKUs',
-    color: 'var(--cyan)',
+    color: 'var(--green)',
   },
   {
-    name: 'Serviettes & Napkins',
+    name: 'Serviettes',
     desc: 'Table napkins and serviettes for hospitality and everyday use.',
-    img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5642-v5dcrdhMk5R9uc4i5u8CUFWSjmjECt.jpeg',
+    img: '/images/products/Sylflora_serviette.JPG',
     count: '5 SKUs',
-    color: '#22A063',
+    color: 'var(--blue)',
   },
   {
     name: 'Facial Tissue',
     desc: 'Soft facial tissues in pocket packs and box formats.',
-    img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5636-c0KeKWmhrFC4iQxZZiiS5UlGWB4hLN.jpeg',
+    img: '/images/products/Sylflora_facialandtabletissue.JPG',
     count: '6 SKUs',
-    color: 'var(--cyan)',
+    color: 'var(--green)',
   },
   {
-    name: 'Baby Diapers',
+    name: 'Diapers',
     desc: 'SylFlora premium diapers — ultra-soft, high absorbency, baby-safe.',
-    img: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5648-5AoxXWJXgP7bPop7zbOIYOHmMCTSwi.png',
+    img: '/images/products/Sylflora_babydiapers1.JPG',
     count: '4 sizes',
-    color: '#22A063',
+    color: 'var(--blue)',
   },
 ]
 
@@ -54,88 +55,171 @@ interface Product {
 }
 
 const products: Product[] = [
+  // Toilet Tissue
   {
     name: 'Royal Flora',
     category: 'Toilet Tissue',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/65c79c3e-4e71-47fd-b7b5-4785d0a19606.jpeg',
+    src: '/images/products/Royal_flora_tissue.JPG',
     featured: true,
   },
   {
     name: 'Soft Flora',
     category: 'Toilet Tissue',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3ced33a6-b641-4221-81cf-6028947bebe3.jpeg',
+    src: '/images/products/Soft_flora_tissuepaper.JPG',
   },
   {
     name: 'Morning Flora',
     category: 'Toilet Tissue',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/0deb3869-95b9-4f4c-8d9e-8475fb7dd6e0.jpeg',
-  },
-  {
-    name: 'Ultra Soft',
-    category: 'Facial Tissue',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7b68f9ec-3114-4f6e-bfb4-4a1ea49b5b07.jpeg',
-    featured: true,
+    src: '/images/products/Morning_flora_softtissue.JPG',
   },
   {
     name: 'Daily Flora',
+    category: 'Toilet Tissue',
+    src: '/images/products/Daily_flora_tissuepaper.PNG',
+  },
+  {
+    name: 'Blessed Flora',
+    category: 'Toilet Tissue',
+    src: '/images/products/Blessed_flora_tissuepaper.PNG',
+  },
+  // Facial Tissue
+  {
+    name: 'SylFlora Facial Tissue',
     category: 'Facial Tissue',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ae53f1b1-cfd5-4f23-a869-f89a555e367f.jpeg',
-  },
-  {
-    name: 'Teal Box',
-    category: 'Facial Tissue',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6661fa1e-f15c-43af-b2b7-0b8c3ab32982.jpeg',
-  },
-  {
-    name: 'Pink Box',
-    category: 'Facial Tissue',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1787dc60-9e8a-4039-b7ce-abb6dc701e10.jpeg',
-  },
-  {
-    name: 'Green Pack',
-    category: 'Handkerchiefs',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7a90b507-9de3-47fe-b569-32d4eff2aa4f.jpeg',
-  },
-  {
-    name: 'Teal Pack',
-    category: 'Handkerchiefs',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cffa708e-0036-4b7d-b73a-e53209c7606d.jpeg',
-  },
-  {
-    name: 'Orange Pack',
-    category: 'Handkerchiefs',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/646dfaca-2ede-4191-9b9b-3e843a17adf1.jpeg',
-  },
-  {
-    name: 'Size 4 Maxi',
-    category: 'Diapers',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5648-5AoxXWJXgP7bPop7zbOIYOHmMCTSwi.png',
+    src: '/images/products/Sylflora_facialandtabletissue.JPG',
     featured: true,
   },
   {
-    name: 'Size 2 Mini',
+    name: 'SylFlora Facial Box',
+    category: 'Facial Tissue',
+    src: '/images/products/Sylflora_facialandtabletissue1.JPG',
+  },
+  {
+    name: 'Daily Flora Facial',
+    category: 'Facial Tissue',
+    src: '/images/products/Dailyflora_facialandtabletissue.JPG',
+  },
+  {
+    name: 'SylFlora Premium',
+    category: 'Facial Tissue',
+    src: '/images/products/Sylflora_facialandtabletissue3.JPG',
+  },
+  {
+    name: 'SylFlora Cube',
+    category: 'Facial Tissue',
+    src: '/images/products/Sylflora_facialandtabletissue4.JPG',
+  },
+  {
+    name: 'SylFlora Compact',
+    category: 'Facial Tissue',
+    src: '/images/products/Sylflora_facialandtabletissue5.JPG',
+  },
+  // Serviettes
+  {
+    name: 'SylFlora Serviette',
+    category: 'Serviettes',
+    src: '/images/products/Sylflora_serviette.JPG',
+    featured: true,
+  },
+  {
+    name: 'Daily Flora Serviette',
+    category: 'Serviettes',
+    src: '/images/products/Daily_flora_serviette.JPG',
+  },
+  {
+    name: 'Soft Flora Serviette',
+    category: 'Serviettes',
+    src: '/images/products/Softflora_serviette1.JPG',
+  },
+  {
+    name: 'SylFlora Premium Serviette',
+    category: 'Serviettes',
+    src: '/images/products/Sylflora_serviette4.JPG',
+  },
+  {
+    name: 'Daily Flora Green',
+    category: 'Serviettes',
+    src: '/images/products/Dailyflora_serviette.JPG',
+  },
+  {
+    name: 'Sylflora Napkin',
+    category: 'Serviettes',
+    src: '/images/products/Sylflora-Serviette.JPG',
+  },
+  // Diapers
+  {
+    name: 'SylFlora Baby Diapers',
     category: 'Diapers',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5647-aW5DHX4eYig8e6Y9F6M9lPSHD1zKfp.png',
+    src: '/images/products/Sylflora_babydiapers1.JPG',
+    featured: true,
   },
   {
-    name: 'Purple',
-    category: 'Uncle Bruno',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/89880d4c-b09a-4019-856a-72b7bcb1e6f4.jpeg',
+    name: 'SylFlora Diapers Pack',
+    category: 'Diapers',
+    src: '/images/products/Sylflora_babydiapers2.JPG',
   },
   {
-    name: 'Black',
-    category: 'Uncle Bruno',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7f915b92-e428-4a8a-a5f3-94ebf1022322.jpeg',
+    name: 'SylFlora Premium Diapers',
+    category: 'Diapers',
+    src: '/images/products/Sylflora_babydiapers3.JPG',
   },
   {
-    name: 'Teal',
-    category: 'Uncle Bruno',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/8196c764-bf8c-4c80-8b4f-5982ad82c4a6.jpeg',
+    name: 'Baby Diapers Box',
+    category: 'Diapers',
+    src: '/images/products/Babydiapers.PNG',
   },
   {
-    name: 'Coral',
-    category: 'Uncle Bruno',
-    src: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1b6795d1-9d04-46d1-93af-ca6e9f340dd4.jpeg',
+    name: 'SylFlora Diapers Range',
+    category: 'Diapers',
+    src: '/images/products/Sylflora_baby_diapers.PNG',
+  },
+  // Handkerchiefs
+  {
+    name: 'SylFlora Pocket Tissue',
+    category: 'Handkerchiefs',
+    src: '/images/products/Pocket_tissue.JPG',
+    featured: true,
+  },
+  {
+    name: 'Tissue Handkerchief',
+    category: 'Handkerchiefs',
+    src: '/images/products/Sylflora_tissuehandkerchief.PNG',
+  },
+  {
+    name: 'Pocket Pack Green',
+    category: 'Handkerchiefs',
+    src: '/images/products/Sylflora_tissuehandkerchief1.PNG',
+  },
+  {
+    name: 'Pocket Pack Blue',
+    category: 'Handkerchiefs',
+    src: '/images/products/Sylflora_tissuehandkerchief2.PNG',
+  },
+  {
+    name: 'Pocket Tissue Teal',
+    category: 'Handkerchiefs',
+    src: '/images/products/Pocket tissue.PNG',
+  },
+  // Uncle Bruno Collection
+  {
+    name: 'Uncle Bruno Facial',
+    category: 'Facial Tissue',
+    src: '/images/products/Uncle_bruno_facialtissue.JPG',
+  },
+  {
+    name: 'Uncle Bruno Box',
+    category: 'Facial Tissue',
+    src: '/images/products/Uncle_bruno_facialtissue1.JPG',
+  },
+  {
+    name: 'Uncle Bruno Premium',
+    category: 'Facial Tissue',
+    src: '/images/products/Uncle Bruno-facialtissue2.JPG',
+  },
+  {
+    name: 'Uncle Bruno Classic',
+    category: 'Facial Tissue',
+    src: '/images/products/Unclebruno-facialtissue.JPG',
   },
 ]
 
@@ -164,8 +248,8 @@ export default function Products() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="mb-16"
         >
-          <p className="tag-cyan mb-5">
-            <span className="rule-cyan" aria-hidden="true" />
+          <p className="tag-green mb-5">
+            <span className="rule-green" aria-hidden="true" />
             Product Ecosystem
           </p>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
@@ -202,14 +286,14 @@ export default function Products() {
               style={{
                 border: '1px solid var(--neutral-200)',
               }}
-              onClick={() => setActive(cat.name.includes('Serviette') ? 'Handkerchiefs' : cat.name as Category)}
+              onClick={() => setActive(cat.name as Category)}
             >
-              <div className="overflow-hidden" style={{ height: '160px' }}>
-                <img
+              <div className="overflow-hidden relative" style={{ height: '180px' }}>
+                <Image
                   src={cat.img}
                   alt={cat.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
               <div
@@ -225,7 +309,7 @@ export default function Products() {
                   </p>
                   <span
                     className="text-[10px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{ color: 'var(--cyan)' }}
+                    style={{ color: 'var(--green)' }}
                   >
                     View &rarr;
                   </span>
@@ -293,8 +377,8 @@ export default function Products() {
             transition={{ duration: 0.3 }}
           >
             {/* Featured row */}
-            {active === 'All' && featuredProducts.length > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            {featuredProducts.length > 0 && (
+              <div className={`grid gap-4 mb-4 ${featuredProducts.length === 1 ? 'grid-cols-1 md:grid-cols-2' : featuredProducts.length === 2 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-3'}`}>
                 {featuredProducts.map((product, i) => (
                   <motion.article
                     key={`featured-${product.name}`}
@@ -307,15 +391,15 @@ export default function Products() {
                       className="relative overflow-hidden aspect-[4/5] img-reveal"
                       style={{ background: 'var(--neutral-100)' }}
                     >
-                      <img
+                      <Image
                         src={product.src}
                         alt={product.name}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
+                        fill
+                        className="object-cover"
                       />
                       <div
                         className="absolute top-3 left-3 px-2.5 py-1 text-[9px] font-bold tracking-[0.12em] uppercase"
-                        style={{ background: 'var(--cyan)', color: '#FFFFFF' }}
+                        style={{ background: 'var(--green)', color: '#FFFFFF' }}
                       >
                         Featured
                       </div>
@@ -334,7 +418,7 @@ export default function Products() {
                       </div>
                       <span
                         className="text-[10px] font-bold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity"
-                        style={{ color: 'var(--cyan)' }}
+                        style={{ color: 'var(--green)' }}
                       >
                         Inquire
                       </span>
@@ -346,13 +430,13 @@ export default function Products() {
 
             {/* Regular grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {(active === 'All' ? regularProducts : filtered).map((product, i) => (
+              {regularProducts.map((product, i) => (
                 <motion.article
                   key={`${product.name}-${product.category}`}
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
-                    delay: (active === 'All' ? 0.15 : 0) + i * 0.03,
+                    delay: (featuredProducts.length > 0 ? 0.15 : 0) + i * 0.03,
                     duration: 0.45,
                   }}
                   className="group cursor-pointer"
@@ -361,11 +445,11 @@ export default function Products() {
                     className="relative overflow-hidden aspect-square img-reveal"
                     style={{ background: 'var(--neutral-100)' }}
                   >
-                    <img
+                    <Image
                       src={product.src}
                       alt={product.name}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
+                      fill
+                      className="object-cover"
                     />
                   </div>
                   <div className="pt-3 pb-2">
@@ -395,7 +479,7 @@ export default function Products() {
           <div>
             <p
               className="text-[11px] font-bold tracking-[0.15em] uppercase mb-1"
-              style={{ color: 'var(--cyan)' }}
+              style={{ color: 'var(--green)' }}
             >
               Wholesale & Distribution
             </p>
@@ -406,13 +490,13 @@ export default function Products() {
           <button
             onClick={() => document.getElementById('distributor')?.scrollIntoView({ behavior: 'smooth' })}
             className="shrink-0 px-8 py-4 text-[12px] font-bold uppercase tracking-[0.1em] transition-all duration-300 whitespace-nowrap"
-            style={{ background: 'var(--cyan)', color: '#FFFFFF' }}
+            style={{ background: 'var(--green)', color: '#FFFFFF' }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--cyan-light)'
+              e.currentTarget.style.background = 'var(--green-light)'
               e.currentTarget.style.transform = 'translateY(-1px)'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'var(--cyan)'
+              e.currentTarget.style.background = 'var(--green)'
               e.currentTarget.style.transform = 'translateY(0)'
             }}
           >
