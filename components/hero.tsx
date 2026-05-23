@@ -3,10 +3,19 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ChevronDown, Award } from 'lucide-react'
+import Image from 'next/image'
 
-// Real SylFlora product images from the user-provided assets
-const FACTORY_IMG = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/66e1bef6-8355-4606-a861-6076ec220833.jpeg'
-const PRODUCT_RANGE_IMG = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5650-SqeDn6CDWd1WDVhwsEUHDCpAyexeHc.jpeg'
+// Local product images for hero composition
+const HERO_PRODUCTS = {
+  main: '/images/products/Sylflora_products.JPG',
+  tissue: '/images/products/Royal_flora_tissue.JPG',
+  facial: '/images/products/Sylflora_facialandtabletissue.JPG',
+  diaper: '/images/products/Sylflora_babydiapers1.JPG',
+  serviette: '/images/products/Sylflora_serviette.JPG',
+}
+
+// Factory background
+const FACTORY_IMG = '/images/manufacturing/Factorymain-image.JPG'
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null)
@@ -38,12 +47,13 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full"
         aria-hidden="true"
       >
-        <div
-          className="w-full h-[115%] bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${FACTORY_IMG})`,
-            transformOrigin: 'center',
-          }}
+        <Image
+          src={FACTORY_IMG}
+          alt=""
+          fill
+          priority
+          className="object-cover object-center"
+          style={{ transform: 'scale(1.15)' }}
         />
       </motion.div>
 
@@ -66,6 +76,82 @@ export default function Hero() {
         aria-hidden="true"
       />
 
+      {/* Floating product composition - right side */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden xl:block pointer-events-none z-[5]">
+        {/* Main product - large */}
+        <motion.div
+          initial={{ opacity: 0, x: 100, y: 20 }}
+          animate={mounted ? { opacity: 1, x: 0, y: 0 } : {}}
+          transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="relative w-[320px] h-[320px]"
+          style={{
+            right: '8%',
+            filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.4))',
+          }}
+        >
+          <Image
+            src={HERO_PRODUCTS.main}
+            alt="SylFlora product range"
+            fill
+            className="object-contain"
+          />
+        </motion.div>
+
+        {/* Floating tissue - top right */}
+        <motion.div
+          initial={{ opacity: 0, y: 30, rotate: -5 }}
+          animate={mounted ? { opacity: 0.9, y: 0, rotate: 8 } : {}}
+          transition={{ duration: 1.2, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute -top-24 right-[15%] w-[140px] h-[140px]"
+          style={{
+            filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.35))',
+          }}
+        >
+          <Image
+            src={HERO_PRODUCTS.tissue}
+            alt=""
+            fill
+            className="object-contain"
+          />
+        </motion.div>
+
+        {/* Floating facial tissue - bottom left */}
+        <motion.div
+          initial={{ opacity: 0, x: -30, y: 20 }}
+          animate={mounted ? { opacity: 0.85, x: 0, y: 0, rotate: -6 } : {}}
+          transition={{ duration: 1.1, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute -bottom-16 left-[-60px] w-[120px] h-[120px]"
+          style={{
+            filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.3))',
+          }}
+        >
+          <Image
+            src={HERO_PRODUCTS.facial}
+            alt=""
+            fill
+            className="object-contain"
+          />
+        </motion.div>
+
+        {/* Floating diaper - far right */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={mounted ? { opacity: 0.75, x: 0, rotate: 12 } : {}}
+          transition={{ duration: 1, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute top-[60%] right-[-40px] w-[100px] h-[100px]"
+          style={{
+            filter: 'drop-shadow(0 12px 24px rgba(0,0,0,0.25))',
+          }}
+        >
+          <Image
+            src={HERO_PRODUCTS.diaper}
+            alt=""
+            fill
+            className="object-contain"
+          />
+        </motion.div>
+      </div>
+
       {/* Content */}
       <motion.div
         style={{ opacity }}
@@ -78,14 +164,14 @@ export default function Hero() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="inline-flex items-center gap-3 mb-10 px-4 py-2.5 rounded"
           style={{
-            background: 'rgba(0,168,198,0.12)',
-            border: '1px solid rgba(0,168,198,0.3)',
+            background: 'rgba(27,122,76,0.12)',
+            border: '1px solid rgba(27,122,76,0.3)',
           }}
         >
-          <Award size={14} style={{ color: 'var(--cyan)' }} aria-hidden="true" />
+          <Award size={14} style={{ color: 'var(--green)' }} aria-hidden="true" />
           <span
             className="text-[11px] font-bold tracking-[0.18em] uppercase"
-            style={{ color: 'var(--cyan)' }}
+            style={{ color: 'var(--green)' }}
           >
             ONICCIMA Award — Best Tissue & Serviette Producer 2024
           </span>
@@ -107,7 +193,7 @@ export default function Hero() {
             >
               {"Nigeria's Trusted"}
               <br />
-              <span style={{ color: 'var(--cyan)' }}>Hygiene</span>
+              <span style={{ color: 'var(--green)' }}>Hygiene</span>
               <br />
               Manufacturing Brand
             </motion.h1>
@@ -134,15 +220,15 @@ export default function Hero() {
                 onClick={() => scrollTo('distributor')}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 text-[13px] font-bold uppercase tracking-[0.1em] transition-all duration-300"
                 style={{
-                  background: 'var(--cyan)',
+                  background: 'var(--green)',
                   color: '#FFFFFF',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--cyan-light)'
+                  e.currentTarget.style.background = 'var(--green-light)'
                   e.currentTarget.style.transform = 'translateY(-2px)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'var(--cyan)'
+                  e.currentTarget.style.background = 'var(--green)'
                   e.currentTarget.style.transform = 'translateY(0)'
                 }}
               >
@@ -158,8 +244,8 @@ export default function Hero() {
                   border: '1px solid rgba(255,255,255,0.3)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--cyan)'
-                  e.currentTarget.style.color = 'var(--cyan)'
+                  e.currentTarget.style.borderColor = 'var(--green)'
+                  e.currentTarget.style.color = 'var(--green)'
                   e.currentTarget.style.transform = 'translateY(-2px)'
                 }}
                 onMouseLeave={(e) => {
@@ -173,32 +259,34 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right — stats strip + product image */}
+          {/* Right — stats strip + product image on mobile/tablet */}
           <motion.div
             initial={{ opacity: 0, x: 32 }}
             animate={mounted ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:flex flex-col gap-6 self-end"
+            className="hidden lg:flex xl:hidden flex-col gap-6 self-end"
           >
-            {/* Product range card */}
+            {/* Product range card - for lg screens only, xl uses floating composition */}
             <div
               className="overflow-hidden"
               style={{
                 border: '1px solid rgba(255,255,255,0.1)',
               }}
             >
-              <img
-                src={PRODUCT_RANGE_IMG}
-                alt="Full SylFlora product range — tissue papers, serviettes, baby diapers"
-                className="w-full object-cover"
-                style={{ height: '200px', objectPosition: 'top' }}
-              />
+              <div className="relative h-[200px]">
+                <Image
+                  src={HERO_PRODUCTS.main}
+                  alt="Full SylFlora product range — tissue papers, serviettes, baby diapers"
+                  fill
+                  className="object-cover object-top"
+                />
+              </div>
               <div
                 className="px-5 py-4 flex items-center justify-between"
                 style={{ background: 'rgba(11,17,32,0.9)' }}
               >
                 <div>
-                  <p className="text-[11px] font-bold tracking-[0.12em] uppercase" style={{ color: 'var(--cyan)' }}>
+                  <p className="text-[11px] font-bold tracking-[0.12em] uppercase" style={{ color: 'var(--green)' }}>
                     Product Range
                   </p>
                   <p className="text-[13px] font-semibold text-white mt-0.5">
@@ -208,14 +296,14 @@ export default function Hero() {
                 <button
                   onClick={() => scrollTo('products')}
                   className="text-[11px] font-bold uppercase tracking-wider px-4 py-2 transition-colors"
-                  style={{ color: 'var(--cyan)', border: '1px solid rgba(0,168,198,0.4)' }}
+                  style={{ color: 'var(--green)', border: '1px solid rgba(27,122,76,0.4)' }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'var(--cyan)'
+                    e.currentTarget.style.background = 'var(--green)'
                     e.currentTarget.style.color = '#fff'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = 'transparent'
-                    e.currentTarget.style.color = 'var(--cyan)'
+                    e.currentTarget.style.color = 'var(--green)'
                   }}
                 >
                   View All
@@ -224,6 +312,37 @@ export default function Hero() {
             </div>
 
             {/* Inline stats */}
+            <div
+              className="grid grid-cols-3 divide-x"
+              style={{ borderColor: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.08)' }}
+            >
+              {[
+                { val: '10+', label: 'Years' },
+                { val: '36', label: 'States' },
+                { val: '30+', label: 'Products' },
+              ].map((s) => (
+                <div key={s.label} className="px-5 py-4 text-center" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+                  <p
+                    className="text-[1.5rem] font-black leading-none"
+                    style={{ fontFamily: 'var(--font-display)', color: '#FFFFFF' }}
+                  >
+                    {s.val}
+                  </p>
+                  <p className="text-[10px] font-semibold tracking-[0.12em] uppercase mt-1.5" style={{ color: 'rgba(255,255,255,0.4)' }}>
+                    {s.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* XL screens - stats only (products are floating) */}
+          <motion.div
+            initial={{ opacity: 0, x: 32 }}
+            animate={mounted ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="hidden xl:flex flex-col gap-6 self-end"
+          >
             <div
               className="grid grid-cols-3 divide-x"
               style={{ borderColor: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.08)' }}

@@ -2,13 +2,18 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Cog, ShieldCheck, BarChart3, Globe2 } from 'lucide-react'
+import { Cog, ShieldCheck, BarChart3, Globe2, Truck, Award } from 'lucide-react'
+import Image from 'next/image'
 
-const FACTORY_MAIN = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/66e1bef6-8355-4606-a861-6076ec220833.jpeg'
-const MACHINE_1 = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/6cacf79a-d3ae-4e16-97a7-4883632b7d6e.jpeg'
-const MACHINE_2 = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/c5d8dd0e-3ac2-4847-b465-733eedf447ae.jpeg'
-const CAMPUS_AERIAL = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/00e25102-7119-467e-ac3e-4487beb113b4.jpeg'
-const VEHICLE_IMG = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_5639-x2hwxIN2lbXJLILGyeMXXfmHXEw2Bl.jpeg'
+// Local manufacturing images
+const FACTORY_MAIN = '/images/manufacturing/Factorymain-image.JPG'
+const PRODUCTION_LINE_1 = '/images/manufacturing/Factoryproductionline.JPG'
+const PRODUCTION_LINE_2 = '/images/manufacturing/Factoryproductionline2.JPG'
+const PRODUCTION_LINE_3 = '/images/manufacturing/Factoryproductionline3.PNG'
+const PRODUCTION_LINE_4 = '/images/manufacturing/Factoryproductionline4.PNG'
+const VEHICLE_IMG = '/images/manufacturing/Factoryvehicle.JPG'
+const PACKAGING_1 = '/images/packaging/Packaging.PNG'
+const PACKAGING_2 = '/images/packaging/Packaging2.PNG'
 
 const capabilities = [
   {
@@ -36,13 +41,13 @@ const capabilities = [
     num: '04',
   },
   {
-    icon: Globe2,
+    icon: Truck,
     title: 'Distribution Ready',
     desc: 'Warehousing and logistics infrastructure built for nationwide and West African supply.',
     num: '05',
   },
   {
-    icon: ShieldCheck,
+    icon: Award,
     title: 'Certified Operations',
     desc: 'ONICCIMA-recognized facility with award-winning production standards.',
     num: '06',
@@ -69,9 +74,9 @@ export default function Manufacturing() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="mb-14"
         >
-          <p className="tag-cyan mb-5">
-            <span className="rule-cyan" aria-hidden="true" />
-            Production Infrastructure
+          <p className="tag-green mb-5">
+            <span className="rule-green" aria-hidden="true" />
+            Inside Our Production Process
           </p>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <h2
@@ -80,7 +85,7 @@ export default function Manufacturing() {
             >
               Industrial-Scale
               <br />
-              <span style={{ color: 'var(--cyan)' }}>Manufacturing Operations</span>
+              <span style={{ color: 'var(--green)' }}>Manufacturing Operations</span>
             </h2>
             <p
               className="text-[15px] leading-relaxed max-w-md"
@@ -98,119 +103,237 @@ export default function Manufacturing() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.1, duration: 0.8 }}
           className="relative overflow-hidden mb-4"
-          style={{ height: '460px' }}
+          style={{ height: '500px' }}
         >
-          <img
+          <Image
             src={FACTORY_MAIN}
             alt="SylFlora Industries Ltd — Nurturing a Hygienic Generation. Factory building, Ogidi Anambra State"
-            className="w-full h-full object-cover object-center"
+            fill
+            className="object-cover object-center"
+            priority
           />
           <div
             className="absolute inset-0"
             style={{
-              background: 'linear-gradient(to top, rgba(8,13,24,0.7) 0%, rgba(8,13,24,0.1) 50%, transparent 100%)',
+              background: 'linear-gradient(to top, rgba(8,13,24,0.85) 0%, rgba(8,13,24,0.2) 40%, transparent 70%)',
             }}
             aria-hidden="true"
           />
           {/* Factory label */}
-          <div className="absolute bottom-0 left-0 right-0 px-8 py-6 flex items-end justify-between">
+          <div className="absolute bottom-0 left-0 right-0 px-8 py-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
               <p
-                className="text-[10px] font-bold tracking-[0.18em] uppercase mb-1"
-                style={{ color: 'var(--cyan)' }}
+                className="text-[10px] font-bold tracking-[0.18em] uppercase mb-2"
+                style={{ color: 'var(--green)' }}
               >
                 Main Facility
               </p>
               <p
-                className="text-[18px] md:text-[22px] font-black text-white"
+                className="text-[20px] md:text-[26px] font-black text-white leading-tight"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
-                SylFlora Industries Ltd — Ogidi, Anambra State
+                SylFlora Industries Ltd
+              </p>
+              <p className="text-[13px] text-white/60 mt-1">
+                Ogidi, Anambra State — Est. 2014
               </p>
             </div>
             <div
-              className="hidden md:flex items-center gap-2 px-4 py-2"
-              style={{ background: 'rgba(0,168,198,0.15)', border: '1px solid rgba(0,168,198,0.3)' }}
+              className="flex items-center gap-2 px-4 py-2.5 self-start md:self-auto"
+              style={{ background: 'rgba(27,122,76,0.15)', border: '1px solid rgba(27,122,76,0.4)' }}
             >
               <span
-                className="w-1.5 h-1.5 rounded-full"
-                style={{ background: 'var(--cyan)' }}
+                className="w-2 h-2 rounded-full animate-pulse"
+                style={{ background: 'var(--green)' }}
                 aria-hidden="true"
               />
               <span
                 className="text-[11px] font-bold tracking-[0.12em] uppercase"
-                style={{ color: 'var(--cyan)' }}
+                style={{ color: 'var(--green)' }}
               >
-                Est. 2014 &mdash; Active
+                Operational
               </span>
             </div>
           </div>
         </motion.div>
 
-        {/* Secondary gallery — 3-column grid */}
-        <div className="grid grid-cols-3 gap-4 mb-16">
-          {[
-            { src: MACHINE_1, alt: 'High precision paper-making machinery — SylFlora Technology', label: 'Paper Making' },
-            { src: MACHINE_2, alt: 'Industrial tissue slitting and cutting machine', label: 'Slitting Equipment' },
-            { src: CAMPUS_AERIAL, alt: 'Aerial view of SylFlora industrial production campus', label: 'Production Campus' },
-          ].map((item, i) => (
+        {/* Production Line Gallery — Asymmetrical Editorial Layout */}
+        <div className="grid grid-cols-12 gap-4 mb-4">
+          {/* Large production image */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="col-span-12 md:col-span-7 relative overflow-hidden group"
+            style={{ height: '320px' }}
+          >
+            <Image
+              src={PRODUCTION_LINE_1}
+              alt="High-speed tissue production line at SylFlora factory"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              style={{ background: 'linear-gradient(to top, rgba(8,13,24,0.8) 0%, transparent 50%)' }}
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <p className="text-[10px] font-bold tracking-[0.15em] uppercase mb-1" style={{ color: 'var(--green)' }}>
+                Production Floor
+              </p>
+              <p className="text-[15px] font-bold text-white">
+                High-Speed Tissue Manufacturing
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Vertical stack */}
+          <div className="col-span-12 md:col-span-5 flex flex-col gap-4">
             <motion.div
-              key={item.label}
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 + i * 0.08, duration: 0.6 }}
-              className="relative overflow-hidden group img-reveal cursor-default"
-              style={{ height: '160px' }}
+              transition={{ delay: 0.25, duration: 0.6 }}
+              className="relative overflow-hidden group flex-1"
+              style={{ minHeight: '152px' }}
             >
-              <img
-                src={item.src}
-                alt={item.alt}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
+              <Image
+                src={PRODUCTION_LINE_2}
+                alt="Paper rolling machinery in operation"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-4"
-                style={{ background: 'linear-gradient(to top, rgba(8,13,24,0.8) 0%, transparent 60%)' }}
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4"
+                style={{ background: 'linear-gradient(to top, rgba(8,13,24,0.75) 0%, transparent 60%)' }}
               >
-                <p className="text-[11px] font-bold tracking-[0.1em] uppercase text-white">{item.label}</p>
+                <p className="text-[11px] font-bold tracking-[0.1em] uppercase text-white">Rolling Equipment</p>
               </div>
             </motion.div>
-          ))}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="relative overflow-hidden group flex-1"
+              style={{ minHeight: '152px' }}
+            >
+              <Image
+                src={PRODUCTION_LINE_3}
+                alt="Industrial slitting and cutting station"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4"
+                style={{ background: 'linear-gradient(to top, rgba(8,13,24,0.75) 0%, transparent 60%)' }}
+              >
+                <p className="text-[11px] font-bold tracking-[0.1em] uppercase text-white">Slitting Station</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
-        {/* Vehicle / brand presence */}
+        {/* Second row — 3 images */}
+        <div className="grid grid-cols-3 gap-4 mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.35, duration: 0.6 }}
+            className="relative overflow-hidden group"
+            style={{ height: '200px' }}
+          >
+            <Image
+              src={PRODUCTION_LINE_4}
+              alt="Quality control and inspection area"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4"
+              style={{ background: 'linear-gradient(to top, rgba(8,13,24,0.75) 0%, transparent 60%)' }}
+            >
+              <p className="text-[11px] font-bold tracking-[0.1em] uppercase text-white">Quality Control</p>
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="relative overflow-hidden group"
+            style={{ height: '200px' }}
+          >
+            <Image
+              src={PACKAGING_1}
+              alt="Product packaging line"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4"
+              style={{ background: 'linear-gradient(to top, rgba(8,13,24,0.75) 0%, transparent 60%)' }}
+            >
+              <p className="text-[11px] font-bold tracking-[0.1em] uppercase text-white">Packaging Line</p>
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.45, duration: 0.6 }}
+            className="relative overflow-hidden group"
+            style={{ height: '200px' }}
+          >
+            <Image
+              src={PACKAGING_2}
+              alt="Finished products packaging station"
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4"
+              style={{ background: 'linear-gradient(to top, rgba(8,13,24,0.75) 0%, transparent 60%)' }}
+            >
+              <p className="text-[11px] font-bold tracking-[0.1em] uppercase text-white">Finished Goods</p>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Brand Presence / Vehicle Banner */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.3, duration: 0.7 }}
-          className="relative overflow-hidden mb-16"
-          style={{ height: '220px' }}
+          transition={{ delay: 0.5, duration: 0.7 }}
+          className="relative overflow-hidden mb-20"
+          style={{ height: '280px' }}
         >
-          <img
+          <Image
             src={VEHICLE_IMG}
-            alt="SylFlora branded vehicle — We Don't Compete, We Lead"
-            className="w-full h-full object-cover"
+            alt="SylFlora branded delivery vehicle — We Don't Compete, We Lead"
+            fill
+            className="object-cover"
             style={{ objectPosition: 'center 40%' }}
           />
           <div
             className="absolute inset-0 flex items-center px-8 md:px-14"
             style={{
-              background: 'linear-gradient(to right, rgba(8,13,24,0.85) 0%, rgba(8,13,24,0.5) 50%, transparent 80%)',
+              background: 'linear-gradient(to right, rgba(8,13,24,0.9) 0%, rgba(8,13,24,0.6) 40%, transparent 70%)',
             }}
           >
-            <div>
+            <div className="max-w-md">
               <p
-                className="text-[11px] font-bold tracking-[0.18em] uppercase mb-2"
-                style={{ color: 'var(--cyan)' }}
+                className="text-[10px] font-bold tracking-[0.18em] uppercase mb-3"
+                style={{ color: 'var(--green)' }}
               >
-                Brand Operations
+                National Distribution Network
               </p>
               <p
-                className="text-[1.5rem] md:text-[2rem] font-black text-white text-balance"
+                className="text-[2rem] md:text-[2.5rem] font-black text-white leading-[1.1] text-balance"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 We Don&apos;t Compete.
-                <br />We Lead.
+                <br />
+                <span style={{ color: 'var(--green)' }}>We Lead.</span>
+              </p>
+              <p className="text-[13px] text-white/50 mt-4 leading-relaxed">
+                Fleet of branded vehicles delivering across all 36 Nigerian states and West African markets.
               </p>
             </div>
           </div>
@@ -221,11 +344,11 @@ export default function Manufacturing() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.35, duration: 0.6 }}
+            transition={{ delay: 0.55, duration: 0.6 }}
             className="mb-10"
           >
-            <p className="tag-cyan mb-3">
-              <span className="rule-cyan" aria-hidden="true" />
+            <p className="tag-green mb-3">
+              <span className="rule-green" aria-hidden="true" />
               Core Capabilities
             </p>
             <h3
@@ -246,7 +369,7 @@ export default function Manufacturing() {
                   key={cap.title}
                   initial={{ opacity: 0, y: 16 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.4 + i * 0.07, duration: 0.5 }}
+                  transition={{ delay: 0.6 + i * 0.07, duration: 0.5 }}
                   className="group flex flex-col gap-4 p-7 transition-colors duration-300 border-b border-r"
                   style={{
                     borderColor: 'var(--neutral-200)',
@@ -262,12 +385,12 @@ export default function Manufacturing() {
                   <div className="flex items-center justify-between">
                     <Icon
                       size={18}
-                      className="transition-colors duration-300 group-hover:text-[var(--cyan)]"
+                      className="transition-colors duration-300 group-hover:text-[var(--green)]"
                       style={{ color: 'var(--neutral-400)' }}
                       aria-hidden="true"
                     />
                     <span
-                      className="text-[10px] font-bold tracking-[0.15em] transition-colors duration-300 group-hover:text-[var(--cyan)]"
+                      className="text-[10px] font-bold tracking-[0.15em] transition-colors duration-300 group-hover:text-[var(--green)]"
                       style={{ color: 'var(--neutral-300)' }}
                     >
                       {cap.num}
