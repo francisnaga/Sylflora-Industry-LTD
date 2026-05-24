@@ -13,22 +13,22 @@ const pillars = [
   {
     title: 'Nationwide Distribution',
     desc: 'Trusted across all 36 states, FCT, and 4 West African countries.',
-    accent: 'var(--cyan)',
+    accent: 'var(--blue)',
   },
   {
     title: 'Hygienic Production',
     desc: '100% virgin wood pulp. ISO-standard manufacturing practices.',
-    accent: 'var(--cyan)',
+    accent: 'var(--green)',
   },
   {
     title: 'Quality Assurance',
     desc: 'Rigorous testing at every stage of our production process.',
-    accent: 'var(--cyan)',
+    accent: 'var(--blue)',
   },
   {
     title: 'Community Impact',
     desc: 'Empowering local employment and nurturing hygiene awareness.',
-    accent: 'var(--cyan)',
+    accent: 'var(--green)',
   },
 ]
 
@@ -235,13 +235,11 @@ export default function About() {
                   boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = '0 12px 40px rgba(0,0,0,0.08)'
-                  e.currentTarget.style.transform = 'translateY(-4px)'
+                  e.currentTarget.style.boxShadow = '0 12px 30px rgba(0,0,0,0.08)'
                   e.currentTarget.style.borderColor = p.accent + '40'
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.02)'
-                  e.currentTarget.style.transform = 'translateY(0)'
                   e.currentTarget.style.borderColor = '#EAE6E0'
                 }}
               >

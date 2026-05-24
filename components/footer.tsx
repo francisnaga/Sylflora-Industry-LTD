@@ -64,10 +64,7 @@ export default function Footer() {
                   className="text-[20px] font-black leading-tight"
                   style={{ fontFamily: 'var(--font-display)', color: '#FFFFFF' }}
                 >
-                  SylFlora
-                </p>
-                <p className="text-[10px] font-semibold tracking-[0.12em] uppercase" style={{ color: 'var(--cyan)' }}>
-                  Industries Ltd
+                  Sylflora Industries LTD
                 </p>
               </div>
             </a>

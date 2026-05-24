@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
@@ -13,38 +13,6 @@ const categories: Category[] = [
   'Serviettes',
   'Diapers',
   'Handkerchiefs',
-]
-
-// Product category highlights using local images
-const ecosystemCategories = [
-  {
-    name: 'Toilet Tissue',
-    desc: 'Premium 300-sheet rolls in multiple plies. Soft, strong, and hygienic.',
-    img: '/images/products/Royal_flora_tissue.JPG',
-    count: '8 SKUs',
-    color: 'var(--green)',
-  },
-  {
-    name: 'Serviettes',
-    desc: 'Table napkins and serviettes for hospitality and everyday use.',
-    img: '/images/products/Sylflora_serviette.JPG',
-    count: '5 SKUs',
-    color: 'var(--blue)',
-  },
-  {
-    name: 'Facial Tissue',
-    desc: 'Soft facial tissues in pocket packs and box formats.',
-    img: '/images/products/Sylflora_facialandtabletissue.JPG',
-    count: '6 SKUs',
-    color: 'var(--green)',
-  },
-  {
-    name: 'Diapers',
-    desc: 'SylFlora premium diapers — ultra-soft, high absorbency, baby-safe.',
-    img: '/images/products/Sylflora_babydiapers1.JPG',
-    count: '4 sizes',
-    color: 'var(--blue)',
-  },
 ]
 
 interface Product {
@@ -81,6 +49,41 @@ const products: Product[] = [
     name: 'Blessed Flora',
     category: 'Toilet Tissue',
     src: '/images/products/Blessed_flora_tissuepaper.PNG',
+  },
+  {
+    name: 'SylFlora Toilet Tissue (Blue)',
+    category: 'Toilet Tissue',
+    src: '/images/products/remote-tissue/remote-tissue-1.jpg',
+  },
+  {
+    name: 'SylFlora Toilet Tissue (Red)',
+    category: 'Toilet Tissue',
+    src: '/images/products/remote-tissue/remote-tissue-2.jpg',
+  },
+  {
+    name: 'SylFlora Toilet Tissue (Yellow)',
+    category: 'Toilet Tissue',
+    src: '/images/products/remote-tissue/remote-tissue-3.jpg',
+  },
+  {
+    name: 'SylFlora Toilet Tissue (Orange)',
+    category: 'Toilet Tissue',
+    src: '/images/products/remote-tissue/remote-tissue-4.jpg',
+  },
+  {
+    name: 'White Flora Bathroom Tissue (Blue)',
+    category: 'Toilet Tissue',
+    src: '/images/products/remote-tissue/remote-tissue-5.png',
+  },
+  {
+    name: 'White Flora Bathroom Tissue (Green)',
+    category: 'Toilet Tissue',
+    src: '/images/products/remote-tissue/remote-tissue-6.png',
+  },
+  {
+    name: 'Golden Flora Restroom Tissue',
+    category: 'Toilet Tissue',
+    src: '/images/products/remote-tissue/remote-tissue-7.jpg',
   },
   // Facial Tissue
   {
@@ -175,12 +178,6 @@ const products: Product[] = [
   },
   // Handkerchiefs
   {
-    name: 'SylFlora Pocket Tissue',
-    category: 'Handkerchiefs',
-    src: '/images/products/Pocket_tissue.JPG',
-    featured: true,
-  },
-  {
     name: 'Tissue Handkerchief',
     category: 'Handkerchiefs',
     src: '/images/products/Sylflora_tissuehandkerchief.PNG',
@@ -195,42 +192,130 @@ const products: Product[] = [
     category: 'Handkerchiefs',
     src: '/images/products/Sylflora_tissuehandkerchief2.PNG',
   },
-  {
-    name: 'Pocket Tissue Teal',
-    category: 'Handkerchiefs',
-    src: '/images/products/Pocket tissue.PNG',
-  },
   // Uncle Bruno Collection
   {
-    name: 'Uncle Bruno Facial',
-    category: 'Facial Tissue',
+    name: 'Uncle Bruno Classic',
+    category: 'Handkerchiefs',
+    src: '/images/products/Unclebruno-facialtissue.JPG',
+  },
+  {
+    name: 'Uncle Bruno Premium',
+    category: 'Handkerchiefs',
+    src: '/images/products/Uncle Bruno-facialtissue2.JPG',
+  },
+  {
+    name: 'Uncle Bruno Pocket',
+    category: 'Handkerchiefs',
     src: '/images/products/Uncle_bruno_facialtissue.JPG',
   },
   {
     name: 'Uncle Bruno Box',
-    category: 'Facial Tissue',
+    category: 'Handkerchiefs',
     src: '/images/products/Uncle_bruno_facialtissue1.JPG',
-  },
-  {
-    name: 'Uncle Bruno Premium',
-    category: 'Facial Tissue',
-    src: '/images/products/Uncle Bruno-facialtissue2.JPG',
-  },
-  {
-    name: 'Uncle Bruno Classic',
-    category: 'Facial Tissue',
-    src: '/images/products/Unclebruno-facialtissue.JPG',
   },
 ]
 
+const categoryMeta: Record<Exclude<Category, 'All'>, { focus: string; useCase: string }> = {
+  'Toilet Tissue': {
+    focus: 'High-capacity rolls and household tissue formats',
+    useCase: 'Retail, hospitality, and institutional washrooms',
+  },
+  'Facial Tissue': {
+    focus: 'Soft facial and table tissue options in boxed and portable formats',
+    useCase: 'Daily-use consumer and office environments',
+  },
+  Serviettes: {
+    focus: 'Disposable service solutions for hospitality and food service',
+    useCase: 'Hotels, restaurants, catering, and events',
+  },
+  Diapers: {
+    focus: 'Comfort-focused baby care products in multiple sizes',
+    useCase: 'Retail, wholesale, and family health channels',
+  },
+  Handkerchiefs: {
+    focus: 'Pocket and travel-friendly tissue formats',
+    useCase: 'Convenience retail and on-the-go consumer needs',
+  },
+}
+
 export default function Products() {
   const [active, setActive] = useState<Category>('All')
+  const [isMobile, setIsMobile] = useState(false)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-40px' })
 
-  const filtered = active === 'All' ? products : products.filter((p) => p.category === active)
-  const featuredProducts = filtered.filter((p) => p.featured)
-  const regularProducts = filtered.filter((p) => !p.featured)
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const updateViewport = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    updateViewport()
+    window.addEventListener('resize', updateViewport)
+
+    return () => window.removeEventListener('resize', updateViewport)
+  }, [])
+
+  const familyGroups = useMemo(() => (
+    categories
+      .filter((category) => category !== 'All')
+      .map((category) => ({
+        name: category,
+        items: products.filter((product) => product.category === category),
+      }))
+  ), [])
+
+  const groupedProducts = useMemo(() => {
+    if (active === 'All' && isMobile) {
+      return []
+    }
+
+    if (active === 'All') {
+      return familyGroups
+    }
+
+    return [
+      {
+        name: active,
+        items: products.filter((product) => product.category === active),
+      },
+    ]
+  }, [active, familyGroups, isMobile])
+
+  const handleFamilySelect = (category: Exclude<Category, 'All'>) => {
+    setActive(category)
+
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    window.setTimeout(() => {
+      document.getElementById(`family-${category}`)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }, 30)
+  }
+
+  const handleBackToAll = () => {
+    setActive('All')
+
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    window.setTimeout(() => {
+      document.getElementById('products')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }, 30)
+  }
+
+  const mobilePreviewCards = isMobile && active === 'All'
 
   return (
     <section
@@ -269,68 +354,6 @@ export default function Products() {
           </div>
         </motion.div>
 
-        {/* Category feature cards — 4 main categories */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.1, duration: 0.7 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14"
-        >
-          {ecosystemCategories.map((cat, i) => (
-            <motion.div
-              key={cat.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.15 + i * 0.07, duration: 0.6 }}
-              className="group cursor-pointer overflow-hidden img-reveal"
-              style={{
-                border: '1px solid var(--neutral-200)',
-              }}
-              onClick={() => setActive(cat.name as Category)}
-            >
-              <div className="overflow-hidden relative" style={{ height: '180px' }}>
-                <Image
-                  src={cat.img}
-                  alt={cat.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div
-                className="p-5 transition-colors duration-300"
-                style={{ background: '#FFFFFF' }}
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <p
-                    className="text-[10px] font-bold tracking-[0.15em] uppercase"
-                    style={{ color: cat.color }}
-                  >
-                    {cat.count}
-                  </p>
-                  <span
-                    className="text-[10px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{ color: 'var(--green)' }}
-                  >
-                    View &rarr;
-                  </span>
-                </div>
-                <h3
-                  className="text-[15px] font-bold leading-snug"
-                  style={{ color: 'var(--navy)' }}
-                >
-                  {cat.name}
-                </h3>
-                <p
-                  className="text-[12px] mt-1.5 leading-snug"
-                  style={{ color: 'var(--neutral-500)' }}
-                >
-                  {cat.desc}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
         {/* Divider */}
         <div
           className="h-px mb-14"
@@ -343,7 +366,7 @@ export default function Products() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2, duration: 0.5 }}
-          className="flex items-center gap-2 flex-wrap mb-12"
+          className="hidden md:flex items-center gap-2 flex-wrap mb-12"
           role="group"
           aria-label="Filter products by category"
         >
@@ -355,9 +378,9 @@ export default function Products() {
                 onClick={() => setActive(cat)}
                 className="px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.1em] transition-all duration-300"
                 style={{
-                  background: isActive ? 'var(--navy)' : 'transparent',
+                  background: isActive ? 'var(--blue)' : 'transparent',
                   color: isActive ? '#FFFFFF' : 'var(--neutral-500)',
-                  border: isActive ? '1px solid var(--navy)' : '1px solid var(--neutral-300)',
+                  border: isActive ? '1px solid var(--blue)' : '1px solid var(--neutral-300)',
                 }}
                 aria-pressed={isActive}
               >
@@ -367,7 +390,86 @@ export default function Products() {
           })}
         </motion.div>
 
-        {/* Product grid */}
+        {mobilePreviewCards && (
+          <div className="space-y-3 mb-8">
+            {familyGroups.map((group, index) => (
+              <motion.button
+                key={group.name}
+                type="button"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: index * 0.05 }}
+                onClick={() => handleFamilySelect(group.name as Exclude<Category, 'All'>)}
+                className="w-full text-left rounded-[1.35rem] border p-4 shadow-[0_16px_40px_rgba(10,22,40,0.08)] transition-transform duration-300 active:scale-[0.99]"
+                style={{
+                  background: 'linear-gradient(180deg, rgba(248,250,252,0.96), #FFFFFF)',
+                  borderColor: 'var(--neutral-200)',
+                }}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: 'var(--green)' }}>
+                      Product family
+                    </p>
+                    <h3
+                      className="text-[1.08rem] font-black leading-tight"
+                      style={{ fontFamily: 'var(--font-display)', color: 'var(--navy)' }}
+                    >
+                      {group.name}
+                    </h3>
+                    <p className="text-[12px] mt-2 leading-relaxed" style={{ color: 'var(--neutral-500)' }}>
+                      {categoryMeta[group.name as Exclude<Category, 'All'>].focus}
+                    </p>
+                  </div>
+                  <span
+                    className="shrink-0 px-3 py-1 text-[10px] font-bold uppercase rounded-full"
+                    style={{ background: 'rgba(21, 101, 192, 0.12)', color: 'var(--blue)' }}
+                  >
+                    Open
+                  </span>
+                </div>
+
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                  {group.items.slice(0, 2).map((product) => (
+                    <div
+                      key={product.name}
+                      className="overflow-hidden rounded-[1rem] border"
+                      style={{ background: 'var(--neutral-100)', borderColor: 'rgba(221,228,235,0.9)' }}
+                    >
+                      <div className="relative aspect-square">
+                        <Image
+                          src={product.src}
+                          alt={product.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.button>
+            ))}
+          </div>
+        )}
+
+        {isMobile && active !== 'All' && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-4"
+          >
+            <button
+              type="button"
+              onClick={handleBackToAll}
+              className="px-4 py-2 text-[11px] font-bold uppercase tracking-[0.12em] rounded-full transition-all duration-300"
+              style={{ background: 'var(--navy)', color: '#FFFFFF' }}
+            >
+              ← Back to families
+            </button>
+          </motion.div>
+        )}
+
+        {/* Product catalog */}
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
@@ -376,91 +478,72 @@ export default function Products() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {/* Featured row */}
-            {featuredProducts.length > 0 && (
-              <div className={`grid gap-4 mb-4 ${featuredProducts.length === 1 ? 'grid-cols-1 md:grid-cols-2' : featuredProducts.length === 2 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1 md:grid-cols-3'}`}>
-                {featuredProducts.map((product, i) => (
-                  <motion.article
-                    key={`featured-${product.name}`}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.06, duration: 0.5 }}
-                    className="group cursor-pointer"
-                  >
-                    <div
-                      className="relative overflow-hidden aspect-[4/5] img-reveal"
-                      style={{ background: 'var(--neutral-100)' }}
-                    >
-                      <Image
-                        src={product.src}
-                        alt={product.name}
-                        fill
-                        className="object-cover"
-                      />
-                      <div
-                        className="absolute top-3 left-3 px-2.5 py-1 text-[9px] font-bold tracking-[0.12em] uppercase"
-                        style={{ background: 'var(--green)', color: '#FFFFFF' }}
-                      >
-                        Featured
-                      </div>
-                    </div>
-                    <div
-                      className="px-1 pt-4 pb-2 flex items-center justify-between"
-                      style={{ borderBottom: '1px solid var(--neutral-200)' }}
-                    >
-                      <div>
-                        <h3 className="text-[15px] font-bold" style={{ color: 'var(--navy)' }}>
-                          {product.name}
-                        </h3>
-                        <p className="text-[11px] mt-0.5" style={{ color: 'var(--neutral-400)' }}>
-                          {product.category}
-                        </p>
-                      </div>
-                      <span
-                        className="text-[10px] font-bold tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity"
-                        style={{ color: 'var(--green)' }}
-                      >
-                        Inquire
-                      </span>
-                    </div>
-                  </motion.article>
-                ))}
-              </div>
-            )}
-
-            {/* Regular grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {regularProducts.map((product, i) => (
-                <motion.article
-                  key={`${product.name}-${product.category}`}
-                  initial={{ opacity: 0, y: 12 }}
+            <div className="space-y-12">
+              {groupedProducts.map((group, index) => (
+                <motion.section
+                  key={group.name}
+                  id={`family-${group.name}`}
+                  initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: (featuredProducts.length > 0 ? 0.15 : 0) + i * 0.03,
-                    duration: 0.45,
-                  }}
-                  className="group cursor-pointer"
+                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  className="rounded-[1.75rem] p-5 md:p-6 shadow-[0_20px_48px_rgba(10,22,40,0.08)]"
+                  style={{ background: 'linear-gradient(180deg, rgba(248,250,252,0.95), #FFFFFF)', border: '1px solid var(--neutral-200)' }}
                 >
-                  <div
-                    className="relative overflow-hidden aspect-square img-reveal"
-                    style={{ background: 'var(--neutral-100)' }}
-                  >
-                    <Image
-                      src={product.src}
-                      alt={product.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="pt-3 pb-2">
-                    <h3 className="text-[13px] font-bold" style={{ color: 'var(--navy)' }}>
-                      {product.name}
+                  <div className="mb-6">
+                    <p className="text-[10px] font-bold tracking-[0.15em] uppercase mb-2" style={{ color: 'var(--green)' }}>
+                      Product family
+                    </p>
+                    <h3
+                      className="text-[1.4rem] md:text-[1.65rem] font-black"
+                      style={{ fontFamily: 'var(--font-display)', color: 'var(--navy)' }}
+                    >
+                      {group.name}
                     </h3>
-                    <p className="text-[11px] mt-0.5" style={{ color: 'var(--neutral-400)' }}>
-                      {product.category}
+                    <p className="text-[13px] mt-2 max-w-2xl" style={{ color: 'var(--neutral-500)' }}>
+                      {categoryMeta[group.name as Exclude<Category, 'All'>].focus}
                     </p>
                   </div>
-                </motion.article>
+
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {group.items.map((product, itemIndex) => (
+                      <motion.article
+                        key={`${group.name}-${product.name}`}
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.45, delay: itemIndex * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                        className="group"
+                      >
+                        <div
+                          className="relative overflow-hidden aspect-square img-reveal"
+                          style={{ background: 'var(--neutral-100)' }}
+                        >
+                          <Image
+                            src={product.src}
+                            alt={product.name}
+                            fill
+                            className="object-cover"
+                          />
+                          {product.featured && (
+                            <div
+                              className="absolute top-3 left-3 px-2.5 py-1 text-[9px] font-bold tracking-[0.12em] uppercase"
+                              style={{ background: 'var(--green)', color: '#FFFFFF' }}
+                            >
+                              Featured
+                            </div>
+                          )}
+                        </div>
+                        <div className="pt-3 pb-1">
+                          <h4 className="text-[13px] font-bold" style={{ color: 'var(--navy)' }}>
+                            {product.name}
+                          </h4>
+                          <p className="text-[11px] mt-1" style={{ color: 'var(--neutral-400)' }}>
+                            {product.category}
+                          </p>
+                        </div>
+                      </motion.article>
+                    ))}
+                  </div>
+                </motion.section>
               ))}
             </div>
           </motion.div>

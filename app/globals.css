@@ -37,8 +37,8 @@
   --green: #1B7A4C;
   --green-light: #27A361;
   --green-dark: #14613B;
-  --cyan: #1B7A4C;
-  --cyan-light: #27A361;
+  --cyan: var(--blue);
+  --cyan-light: var(--blue-light);
   --white: #FFFFFF;
   --off-white: #F8FAFB;
 
@@ -209,7 +209,7 @@
   display: inline-block;
   width: 2.5rem;
   height: 2px;
-  background: var(--green);
+  background: var(--blue);
   border-radius: 1px;
 }
 
@@ -233,7 +233,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--green);
+  color: var(--blue);
 }
 
 /* Industrial card */

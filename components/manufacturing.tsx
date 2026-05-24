@@ -376,10 +376,16 @@ export default function Manufacturing() {
                     background: '#FFFFFF',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'var(--navy)'
+                    e.currentTarget.style.background = 'var(--blue-light)'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = '#FFFFFF'
+                  }}
+                  onMouseDown={(e) => {
+                    e.currentTarget.style.background = 'var(--blue-light)'
+                  }}
+                  onMouseUp={(e) => {
+                    e.currentTarget.style.background = 'var(--blue-light)'
                   }}
                 >
                   <div className="flex items-center justify-between">

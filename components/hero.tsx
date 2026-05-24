@@ -241,17 +241,15 @@ export default function Hero() {
                 style={{
                   background: 'transparent',
                   color: '#FFFFFF',
-                  border: '1px solid rgba(255,255,255,0.3)',
+                  border: '1px solid rgba(21,101,192,0.45)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--green)'
-                  e.currentTarget.style.color = 'var(--green)'
-                  e.currentTarget.style.transform = 'translateY(-2px)'
+                  e.currentTarget.style.borderColor = 'var(--blue)'
+                  e.currentTarget.style.color = 'var(--blue)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'
+                  e.currentTarget.style.borderColor = 'rgba(21,101,192,0.45)'
                   e.currentTarget.style.color = '#FFFFFF'
-                  e.currentTarget.style.transform = 'translateY(0)'
                 }}
               >
                 Contact Sales

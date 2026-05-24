@@ -62,18 +62,12 @@ export default function Navbar() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="flex flex-col leading-none">
+              <div className="leading-none">
                 <span
                   className="text-[15px] md:text-[16px] font-black tracking-[-0.01em]"
                   style={{ fontFamily: 'var(--font-display)', color: '#FFFFFF' }}
                 >
-                  SylFlora
-                </span>
-                <span
-                  className="text-[9px] font-bold tracking-[0.15em] uppercase"
-                  style={{ color: 'var(--green)' }}
-                >
-                  Industries Ltd
+                  Sylflora Industries LTD
                 </span>
               </div>
             </button>
