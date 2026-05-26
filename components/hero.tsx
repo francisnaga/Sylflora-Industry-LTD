@@ -60,10 +60,10 @@ export default function Hero() {
       {/* Dark industrial overlay — layered for depth */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'linear-gradient(to top, rgba(8,13,24,0.97) 0%, rgba(8,13,24,0.75) 30%, rgba(8,13,24,0.45) 65%, rgba(8,13,24,0.3) 100%)',
-        }}
+          style={{
+            background: 'rgba(21,101,192,0.12)', // project blue
+            border: '1px solid rgba(21,101,192,0.3)',
+          }}
         aria-hidden="true"
       />
       {/* Left vignette for text legibility */}
@@ -155,7 +155,7 @@ export default function Hero() {
       {/* Content */}
       <motion.div
         style={{ opacity }}
-        className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 xl:px-16 pb-20 md:pb-28 pt-40"
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 xl:px-16 pb-20 md:pb-28 pt-24 md:pt-28"
       >
         {/* Award badge — real credibility signal */}
         <motion.div
@@ -168,10 +168,10 @@ export default function Hero() {
             border: '1px solid rgba(27,122,76,0.3)',
           }}
         >
-          <Award size={14} style={{ color: 'var(--green)' }} aria-hidden="true" />
+          <Award size={14} style={{ color: 'var(--blue)' }} aria-hidden="true" />
           <span
             className="text-[11px] font-bold tracking-[0.18em] uppercase"
-            style={{ color: 'var(--green)' }}
+            style={{ color: 'var(--blue)' }}
           >
             ONICCIMA Award — Best Tissue & Serviette Producer 2024
           </span>
