@@ -323,7 +323,7 @@ export default function Products() {
                 </button>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {activeFamily.products.map((product, index) => (
                   <motion.article
                     key={product.name}
@@ -336,26 +336,26 @@ export default function Products() {
                       <motion.div
                         whileHover={{ scale: 1.01 }}
                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                        className="relative aspect-[4/5]"
+                        className="relative aspect-square flex items-center justify-center"
                       >
                         <Image
                           src={product.src}
                           alt={product.name}
                           fill
-                          className="object-cover"
-                          sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
+                          className="object-contain p-6"
+                          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                         />
                       </motion.div>
-                      <div className="px-4 pt-4 pb-5">
+                      <div className="px-6 py-5">
                         {/* Accent pill removed as requested */}
                         <h4
-                          className="mt-3 text-[1.02rem] font-black leading-tight"
+                          className="text-lg font-black leading-tight"
                           style={{ fontFamily: 'var(--font-display)', color: 'var(--navy)' }}
                         >
                           {product.name}
                         </h4>
                         <p
-                          className="mt-2 text-[13px] leading-relaxed"
+                          className="mt-2 text-sm leading-relaxed"
                           style={{ color: 'var(--neutral-500)' }}
                         >
                           {product.description}
@@ -447,13 +447,13 @@ export default function Products() {
                         <motion.div
                           whileHover={{ scale: 1.01 }}
                           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                          className="relative min-h-[180px] md:min-h-full"
+                          className="relative min-h-[180px] md:min-h-full flex items-center justify-center bg-[#f8fafc]"
                         >
                           <Image
                             src={product.src}
                             alt={product.name}
                             fill
-                            className="object-cover"
+                            className="object-contain"
                             sizes="(min-width: 1024px) 22vw, 100vw"
                           />
                         </motion.div>
