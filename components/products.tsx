@@ -447,13 +447,13 @@ export default function Products() {
                         <motion.div
                           whileHover={{ scale: 1.01 }}
                           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                          className="relative min-h-[180px] md:min-h-full"
+                          className="relative min-h-[180px] md:min-h-full flex items-center justify-center bg-[#f8fafc]"
                         >
                           <Image
                             src={product.src}
                             alt={product.name}
                             fill
-                            className="object-cover"
+                            className="object-contain"
                             sizes="(min-width: 1024px) 22vw, 100vw"
                           />
                         </motion.div>
