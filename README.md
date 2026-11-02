@@ -1,11 +1,19 @@
-# Sylflora Industry LTD
+<p align="center">
+  <img src="public/apple-icon.png" alt="Sylflora Industry Brand Logo" width="100" height="100" />
+</p>
 
-Corporate web portal and operational showcase for Sylflora Industry LTD, featuring product catalogs, supply chain logistics, and client inquiry pipelines.
+<h1 align="center">Sylflora Industry LTD</h1>
 
-[![Next.js](https://img.shields.io/badge/Framework-Next.js-black?logo=next.js&logoColor=white)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/Language-TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Styling-Tailwind%20CSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Radix UI](https://img.shields.io/badge/UI-Radix%20UI-161618?logo=radix-ui&logoColor=white)](https://www.radix-ui.com/)
+<p align="center">
+  <strong>Corporate web portal and operational showcase for Sylflora Industry LTD, featuring product catalogs, supply chain logistics, and client inquiry pipelines.</strong>
+</p>
+
+<p align="center">
+  <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Framework-Next.js-black?logo=next.js&logoColor=white" alt="Next.js" /></a>
+  <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/Language-TypeScript-3178C6?logo=typescript&logoColor=white" alt="TypeScript" /></a>
+  <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Styling-Tailwind%20CSS-38B2AC?logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
+  <a href="https://www.radix-ui.com/"><img src="https://img.shields.io/badge/UI-Radix%20UI-161618?logo=radix-ui&logoColor=white" alt="Radix UI" /></a>
+</p>
 
 ---
 
